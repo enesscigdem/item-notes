@@ -20,3 +20,5 @@
 /Users/enescigdem/Downloads/item-notes/src/ItemNotes.UI/bin/Debug/net8.0/ItemNotes.Infrastructure.pdb
 /Users/enescigdem/Downloads/item-notes/src/ItemNotes.UI/obj/Debug/net8.0/ItemNote.611B783F.Up2Date
 /Users/enescigdem/Downloads/item-notes/src/ItemNotes.UI/obj/Debug/net8.0/ref/ItemNotes.UI.dll
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.UI/bin/Debug/net8.0/ItemNotes.UI.runtimeconfig.json
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.UI/obj/Debug/net8.0/ItemNotes.UI.genruntimeconfig.cache
