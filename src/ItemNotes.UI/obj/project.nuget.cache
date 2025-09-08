@@ -1,20 +1,25 @@
 {
   "version": 2,
-  "dgSpecHash": "0HdLiM6FaBA=",
+  "dgSpecHash": "FQ5BiGWUKlc=",
   "success": true,
   "projectFilePath": "/Users/enescigdem/Downloads/item-notes/src/ItemNotes.UI/ItemNotes.UI.csproj",
   "expectedPackageFiles": [
     "/Users/enescigdem/.nuget/packages/avalonia/11.2.8/avalonia.11.2.8.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/avalonia.angle.windows.natives/2.1.22045.20230930/avalonia.angle.windows.natives.2.1.22045.20230930.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/avalonia.buildservices/0.0.31/avalonia.buildservices.0.0.31.nupkg.sha512",
+    "/Users/enescigdem/.nuget/packages/avalonia.controls.colorpicker/11.2.8/avalonia.controls.colorpicker.11.2.8.nupkg.sha512",
+    "/Users/enescigdem/.nuget/packages/avalonia.controls.datagrid/11.2.8/avalonia.controls.datagrid.11.2.8.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/avalonia.controls.itemsrepeater/11.1.5/avalonia.controls.itemsrepeater.11.1.5.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/avalonia.desktop/11.2.8/avalonia.desktop.11.2.8.nupkg.sha512",
+    "/Users/enescigdem/.nuget/packages/avalonia.diagnostics/11.2.8/avalonia.diagnostics.11.2.8.nupkg.sha512",
+    "/Users/enescigdem/.nuget/packages/avalonia.fonts.inter/11.2.8/avalonia.fonts.inter.11.2.8.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/avalonia.freedesktop/11.2.8/avalonia.freedesktop.11.2.8.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/avalonia.native/11.2.8/avalonia.native.11.2.8.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/avalonia.reactiveui/11.2.8/avalonia.reactiveui.11.2.8.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/avalonia.remote.protocol/11.2.8/avalonia.remote.protocol.11.2.8.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/avalonia.skia/11.2.8/avalonia.skia.11.2.8.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/avalonia.themes.fluent/11.2.8/avalonia.themes.fluent.11.2.8.nupkg.sha512",
+    "/Users/enescigdem/.nuget/packages/avalonia.themes.simple/11.2.8/avalonia.themes.simple.11.2.8.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/avalonia.win32/11.2.8/avalonia.win32.11.2.8.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/avalonia.x11/11.2.8/avalonia.x11.11.2.8.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/azure.core/1.35.0/azure.core.1.35.0.nupkg.sha512",
@@ -136,49 +141,7 @@
     "/Users/enescigdem/.nuget/packages/system.windows.extensions/6.0.0/system.windows.extensions.6.0.0.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/tmds.dbus.protocol/0.20.0/tmds.dbus.protocol.0.20.0.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/microsoft.netcore.app.ref/8.0.13/microsoft.netcore.app.ref.8.0.13.nupkg.sha512",
-    "/Users/enescigdem/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.13/microsoft.aspnetcore.app.ref.8.0.13.nupkg.sha512",
-    "/Users/enescigdem/.nuget/packages/microsoft.netcore.app.host.osx-arm64/8.0.13/microsoft.netcore.app.host.osx-arm64.8.0.13.nupkg.sha512"
+    "/Users/enescigdem/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.13/microsoft.aspnetcore.app.ref.8.0.13.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1603",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "ItemNotes.UI, Microsoft.Extensions.Configuration (>= 8.0.3) öğesine bağlı ancak Microsoft.Extensions.Configuration 8.0.3 bulunamadı. Bunun yerine Microsoft.Extensions.Configuration 9.0.0 çözümlendi.",
-      "libraryId": "Microsoft.Extensions.Configuration",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    },
-    {
-      "code": "NU1603",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "ItemNotes.UI, Microsoft.Extensions.Configuration.Json (>= 8.0.3) öğesine bağlı ancak Microsoft.Extensions.Configuration.Json 8.0.3 bulunamadı. Bunun yerine Microsoft.Extensions.Configuration.Json 9.0.0 çözümlendi.",
-      "libraryId": "Microsoft.Extensions.Configuration.Json",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    },
-    {
-      "code": "NU1603",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "ItemNotes.UI, Microsoft.Extensions.DependencyInjection (>= 8.0.3) öğesine bağlı ancak Microsoft.Extensions.DependencyInjection 8.0.3 bulunamadı. Bunun yerine Microsoft.Extensions.DependencyInjection 9.0.0 çözümlendi.",
-      "libraryId": "Microsoft.Extensions.DependencyInjection",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    },
-    {
-      "code": "NU1603",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "ItemNotes.UI, Microsoft.Extensions.Hosting (>= 8.0.3) öğesine bağlı ancak Microsoft.Extensions.Hosting 8.0.3 bulunamadı. Bunun yerine Microsoft.Extensions.Hosting 9.0.0 çözümlendi.",
-      "libraryId": "Microsoft.Extensions.Hosting",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    }
-  ]
+  "logs": []
 }

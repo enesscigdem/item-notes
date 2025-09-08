@@ -1,14 +1,14 @@
-<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="clr-namespace:ItemNotes.UI.ViewModels"
-        x:Class="ItemNotes.UI.Views.NoteWindow"
-        Title="Not Düzenleyici"
-        Width="900" Height="700">
-  <Window.DataContext>
-    <vm:NoteWindowViewModel />
-  </Window.DataContext>
+<Window
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:vm="clr-namespace:ItemNotes.UI.ViewModels"
+  xmlns:avrtb="clr-namespace:AvRichTextBox;assembly=Simplecto.Avalonia.RichTextBox"
+  xmlns:avRichTextBox="clr-namespace:AvRichTextBox;assembly=AvRichTextBox"
+  x:Class="ItemNotes.UI.Views.NoteWindow"
+  Title="Not Düzenleyici"
+  Width="900" Height="700">
+
   <DockPanel Margin="10">
-    <!-- Araç çubuğu -->
     <ScrollViewer DockPanel.Dock="Top" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
       <StackPanel Orientation="Horizontal" Spacing="5">
         <Button Content="Kalın" Command="{Binding BoldCommand}" />
@@ -23,20 +23,25 @@
         <Button Content="Sayfa Ekle" Command="{Binding AddPageCommand}" />
       </StackPanel>
     </ScrollViewer>
-    <!-- Sayfalar -->
-    <TabControl Items="{Binding Pages}" SelectedItem="{Binding SelectedPage}" Margin="0,10,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+    <!-- Items -> ItemsSource -->
+    <TabControl ItemsSource="{Binding Pages}" SelectedItem="{Binding SelectedPage}" Margin="0,10,0,0">
       <TabControl.ItemTemplate>
         <DataTemplate>
           <TextBlock Text="{Binding Header}" />
         </DataTemplate>
       </TabControl.ItemTemplate>
+
+      <!-- DataTemplate içindeyken DataContext = PageViewModel -->
       <TabControl.ContentTemplate>
         <DataTemplate>
-          <av:RichTextBox FlowDoc="{Binding Document}" IsReadOnly="{Binding IsReadOnly}" />
+          <avRichTextBox:RichTextBox
+            FlowDocument="{Binding SelectedPage.Document}"
+            IsReadOnly="{Binding SelectedPage.IsReadOnly}" />
         </DataTemplate>
       </TabControl.ContentTemplate>
     </TabControl>
-    <!-- Alt bilgi -->
+
     <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0" Spacing="10">
       <TextBlock Text="{Binding Note.CreatedBy}" />
       <TextBlock Text="{Binding Note.CreatedAt, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}" />

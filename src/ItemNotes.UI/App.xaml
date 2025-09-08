@@ -2,13 +2,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:converters="clr-namespace:ItemNotes.UI.Converters"
              x:Class="ItemNotes.UI.App">
-  <Application.Styles>
-    <!-- Varsayılan Fluent tema -->
-    <FluentTheme Mode="Light"/>
-  </Application.Styles>
-  <Application.Resources>
-    <!-- Converters global olarak tanımlanır -->
-    <converters:NullToBoolConverter x:Key="NullToBoolConverter" />
-    <converters:NoteColorToBrushConverter x:Key="NoteColorToBrushConverter" />
-  </Application.Resources>
+    <Application.Styles>
+        <!-- Default Fluent theme -->
+        <FluentTheme />
+    </Application.Styles>
+    <Application.Resources>
+        <!-- Global converters -->
+        <converters:NullToBoolConverter x:Key="NullToBoolConverter" />
+        <converters:NoteColorToBrushConverter x:Key="NoteColorToBrushConverter" />
+    </Application.Resources>
 </Application>

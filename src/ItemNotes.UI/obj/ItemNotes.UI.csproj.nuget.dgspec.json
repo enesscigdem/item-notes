@@ -260,6 +260,9 @@
             "projectReferences": {
               "/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Application/ItemNotes.Application.csproj": {
                 "projectPath": "/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Application/ItemNotes.Application.csproj"
+              },
+              "/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Domain/ItemNotes.Domain.csproj": {
+                "projectPath": "/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Domain/ItemNotes.Domain.csproj"
               }
             }
           }
@@ -284,11 +287,15 @@
               "target": "Package",
               "version": "[11.2.8, )"
             },
-            "Avalonia.Controls.ItemsRepeater": {
-              "target": "Package",
-              "version": "[11.1.5, )"
-            },
             "Avalonia.Desktop": {
+              "target": "Package",
+              "version": "[11.2.8, )"
+            },
+            "Avalonia.Diagnostics": {
+              "target": "Package",
+              "version": "[11.2.8, )"
+            },
+            "Avalonia.Fonts.Inter": {
               "target": "Package",
               "version": "[11.2.8, )"
             },
@@ -296,33 +303,37 @@
               "target": "Package",
               "version": "[11.2.8, )"
             },
-            "Avalonia.Skia": {
-              "target": "Package",
-              "version": "[11.2.8, )"
-            },
             "Avalonia.Themes.Fluent": {
               "target": "Package",
               "version": "[11.2.8, )"
             },
+            "Microsoft.CodeAnalysis.CSharp": {
+              "target": "Package",
+              "version": "[4.5.0, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
-              "version": "[8.0.3, )"
+              "version": "[9.0.0, )"
             },
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
-              "version": "[8.0.3, )"
+              "version": "[9.0.0, )"
             },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
-              "version": "[8.0.3, )"
+              "version": "[9.0.0, )"
             },
             "Microsoft.Extensions.Hosting": {
               "target": "Package",
-              "version": "[8.0.3, )"
+              "version": "[9.0.0, )"
             },
             "Simplecto.Avalonia.RichTextBox": {
               "target": "Package",
               "version": "[1.3.9, )"
+            },
+            "System.Reactive": {
+              "target": "Package",
+              "version": "[6.0.1, )"
             }
           },
           "imports": [
@@ -339,10 +350,6 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.13, 8.0.13]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.osx-arm64",
               "version": "[8.0.13, 8.0.13]"
             },
             {

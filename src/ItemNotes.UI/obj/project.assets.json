@@ -107,6 +107,40 @@
           "buildTransitive/Avalonia.BuildServices.targets": {}
         }
       },
+      "Avalonia.Controls.ColorPicker/11.2.8": {
+        "type": "package",
+        "dependencies": {
+          "Avalonia": "11.2.8",
+          "Avalonia.Remote.Protocol": "11.2.8"
+        },
+        "compile": {
+          "lib/net8.0/Avalonia.Controls.ColorPicker.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Avalonia.Controls.ColorPicker.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Avalonia.Controls.DataGrid/11.2.8": {
+        "type": "package",
+        "dependencies": {
+          "Avalonia": "11.2.8",
+          "Avalonia.Remote.Protocol": "11.2.8"
+        },
+        "compile": {
+          "lib/net8.0/Avalonia.Controls.DataGrid.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Avalonia.Controls.DataGrid.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Avalonia.Controls.ItemsRepeater/11.1.5": {
         "type": "package",
         "dependencies": {
@@ -139,6 +173,41 @@
         },
         "runtime": {
           "lib/net8.0/Avalonia.Desktop.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Avalonia.Diagnostics/11.2.8": {
+        "type": "package",
+        "dependencies": {
+          "Avalonia": "11.2.8",
+          "Avalonia.Controls.ColorPicker": "11.2.8",
+          "Avalonia.Controls.DataGrid": "11.2.8",
+          "Avalonia.Themes.Simple": "11.2.8"
+        },
+        "compile": {
+          "lib/net8.0/Avalonia.Diagnostics.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Avalonia.Diagnostics.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Avalonia.Fonts.Inter/11.2.8": {
+        "type": "package",
+        "dependencies": {
+          "Avalonia": "11.2.8"
+        },
+        "compile": {
+          "lib/net8.0/Avalonia.Fonts.Inter.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Avalonia.Fonts.Inter.dll": {
             "related": ".xml"
           }
         }
@@ -247,6 +316,22 @@
         },
         "runtime": {
           "lib/net8.0/Avalonia.Themes.Fluent.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Avalonia.Themes.Simple/11.2.8": {
+        "type": "package",
+        "dependencies": {
+          "Avalonia": "11.2.8"
+        },
+        "compile": {
+          "lib/net8.0/Avalonia.Themes.Simple.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Avalonia.Themes.Simple.dll": {
             "related": ".xml"
           }
         }
@@ -2876,6 +2961,42 @@
         "tools/netstandard2.0/runtimeconfig.json"
       ]
     },
+    "Avalonia.Controls.ColorPicker/11.2.8": {
+      "sha512": "AWUoXLK9l8WnlXS+7VvjNXKK31C7Mkj/c4c7FWiyLqPEerjO6fJmAVasNN/8hkzyc1uPadqup8ya9XiEhoudxg==",
+      "type": "package",
+      "path": "avalonia.controls.colorpicker/11.2.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "avalonia.controls.colorpicker.11.2.8.nupkg.sha512",
+        "avalonia.controls.colorpicker.nuspec",
+        "lib/net6.0/Avalonia.Controls.ColorPicker.dll",
+        "lib/net6.0/Avalonia.Controls.ColorPicker.xml",
+        "lib/net8.0/Avalonia.Controls.ColorPicker.dll",
+        "lib/net8.0/Avalonia.Controls.ColorPicker.xml",
+        "lib/netstandard2.0/Avalonia.Controls.ColorPicker.dll",
+        "lib/netstandard2.0/Avalonia.Controls.ColorPicker.xml"
+      ]
+    },
+    "Avalonia.Controls.DataGrid/11.2.8": {
+      "sha512": "qrHnurYxbIn5rSLrBkhGvfWTxORwPR4abyH8fG7L/IE9QRoMdqr4aLsA4WRc8KiaKr9e/krGB2WpK7goAbkd/Q==",
+      "type": "package",
+      "path": "avalonia.controls.datagrid/11.2.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "avalonia.controls.datagrid.11.2.8.nupkg.sha512",
+        "avalonia.controls.datagrid.nuspec",
+        "lib/net6.0/Avalonia.Controls.DataGrid.dll",
+        "lib/net6.0/Avalonia.Controls.DataGrid.xml",
+        "lib/net8.0/Avalonia.Controls.DataGrid.dll",
+        "lib/net8.0/Avalonia.Controls.DataGrid.xml",
+        "lib/netstandard2.0/Avalonia.Controls.DataGrid.dll",
+        "lib/netstandard2.0/Avalonia.Controls.DataGrid.xml"
+      ]
+    },
     "Avalonia.Controls.ItemsRepeater/11.1.5": {
       "sha512": "MfsDSvpa/QUvOw8c8BQtDHHu3DUHYYGjkDBpN0uOpjFqng6qCzkuoyJZ7vIXSlDNb685yqW8VluWMjniz5BI4A==",
       "type": "package",
@@ -2910,6 +3031,42 @@
         "lib/net8.0/Avalonia.Desktop.xml",
         "lib/netstandard2.0/Avalonia.Desktop.dll",
         "lib/netstandard2.0/Avalonia.Desktop.xml"
+      ]
+    },
+    "Avalonia.Diagnostics/11.2.8": {
+      "sha512": "E6hLOMp9w1lmM15gM676lNczItQsWKKAkZXckVnukWl2uQPMUCKrmXmfO8Zp8xH8rdbigr1x7YT/ZUt6elwPfA==",
+      "type": "package",
+      "path": "avalonia.diagnostics/11.2.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "avalonia.diagnostics.11.2.8.nupkg.sha512",
+        "avalonia.diagnostics.nuspec",
+        "lib/net6.0/Avalonia.Diagnostics.dll",
+        "lib/net6.0/Avalonia.Diagnostics.xml",
+        "lib/net8.0/Avalonia.Diagnostics.dll",
+        "lib/net8.0/Avalonia.Diagnostics.xml",
+        "lib/netstandard2.0/Avalonia.Diagnostics.dll",
+        "lib/netstandard2.0/Avalonia.Diagnostics.xml"
+      ]
+    },
+    "Avalonia.Fonts.Inter/11.2.8": {
+      "sha512": "A9XKjksoHC+rBbgZBGqN9rLH/9MiaQZHJg5toS+R4CeTqXwF608p1/ZdNM3GUogfDvlwUmdqhX/NHrbz5LNLqg==",
+      "type": "package",
+      "path": "avalonia.fonts.inter/11.2.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "avalonia.fonts.inter.11.2.8.nupkg.sha512",
+        "avalonia.fonts.inter.nuspec",
+        "lib/net6.0/Avalonia.Fonts.Inter.dll",
+        "lib/net6.0/Avalonia.Fonts.Inter.xml",
+        "lib/net8.0/Avalonia.Fonts.Inter.dll",
+        "lib/net8.0/Avalonia.Fonts.Inter.xml",
+        "lib/netstandard2.0/Avalonia.Fonts.Inter.dll",
+        "lib/netstandard2.0/Avalonia.Fonts.Inter.xml"
       ]
     },
     "Avalonia.FreeDesktop/11.2.8": {
@@ -3019,6 +3176,24 @@
         "lib/net8.0/Avalonia.Themes.Fluent.xml",
         "lib/netstandard2.0/Avalonia.Themes.Fluent.dll",
         "lib/netstandard2.0/Avalonia.Themes.Fluent.xml"
+      ]
+    },
+    "Avalonia.Themes.Simple/11.2.8": {
+      "sha512": "x4QslA33tCmjZEosu1leUoDvCUPFX0YsDwAiSiKmfG2Gr98wqbx25C5avgwYmu4SmGsW65t6DabEgxWFwZ48oA==",
+      "type": "package",
+      "path": "avalonia.themes.simple/11.2.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "avalonia.themes.simple.11.2.8.nupkg.sha512",
+        "avalonia.themes.simple.nuspec",
+        "lib/net6.0/Avalonia.Themes.Simple.dll",
+        "lib/net6.0/Avalonia.Themes.Simple.xml",
+        "lib/net8.0/Avalonia.Themes.Simple.dll",
+        "lib/net8.0/Avalonia.Themes.Simple.xml",
+        "lib/netstandard2.0/Avalonia.Themes.Simple.dll",
+        "lib/netstandard2.0/Avalonia.Themes.Simple.xml"
       ]
     },
     "Avalonia.Win32/11.2.8": {
@@ -6959,17 +7134,20 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "Avalonia >= 11.2.8",
-      "Avalonia.Controls.ItemsRepeater >= 11.1.5",
       "Avalonia.Desktop >= 11.2.8",
+      "Avalonia.Diagnostics >= 11.2.8",
+      "Avalonia.Fonts.Inter >= 11.2.8",
       "Avalonia.ReactiveUI >= 11.2.8",
-      "Avalonia.Skia >= 11.2.8",
       "Avalonia.Themes.Fluent >= 11.2.8",
       "ItemNotes.Application >= 1.0.0",
-      "Microsoft.Extensions.Configuration >= 8.0.3",
-      "Microsoft.Extensions.Configuration.Json >= 8.0.3",
-      "Microsoft.Extensions.DependencyInjection >= 8.0.3",
-      "Microsoft.Extensions.Hosting >= 8.0.3",
-      "Simplecto.Avalonia.RichTextBox >= 1.3.9"
+      "ItemNotes.Domain >= 1.0.0",
+      "Microsoft.CodeAnalysis.CSharp >= 4.5.0",
+      "Microsoft.Extensions.Configuration >= 9.0.0",
+      "Microsoft.Extensions.Configuration.Json >= 9.0.0",
+      "Microsoft.Extensions.DependencyInjection >= 9.0.0",
+      "Microsoft.Extensions.Hosting >= 9.0.0",
+      "Simplecto.Avalonia.RichTextBox >= 1.3.9",
+      "System.Reactive >= 6.0.1"
     ]
   },
   "packageFolders": {
@@ -6999,6 +7177,9 @@
           "projectReferences": {
             "/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Application/ItemNotes.Application.csproj": {
               "projectPath": "/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Application/ItemNotes.Application.csproj"
+            },
+            "/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Domain/ItemNotes.Domain.csproj": {
+              "projectPath": "/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Domain/ItemNotes.Domain.csproj"
             }
           }
         }
@@ -7023,11 +7204,15 @@
             "target": "Package",
             "version": "[11.2.8, )"
           },
-          "Avalonia.Controls.ItemsRepeater": {
-            "target": "Package",
-            "version": "[11.1.5, )"
-          },
           "Avalonia.Desktop": {
+            "target": "Package",
+            "version": "[11.2.8, )"
+          },
+          "Avalonia.Diagnostics": {
+            "target": "Package",
+            "version": "[11.2.8, )"
+          },
+          "Avalonia.Fonts.Inter": {
             "target": "Package",
             "version": "[11.2.8, )"
           },
@@ -7035,33 +7220,37 @@
             "target": "Package",
             "version": "[11.2.8, )"
           },
-          "Avalonia.Skia": {
-            "target": "Package",
-            "version": "[11.2.8, )"
-          },
           "Avalonia.Themes.Fluent": {
             "target": "Package",
             "version": "[11.2.8, )"
           },
+          "Microsoft.CodeAnalysis.CSharp": {
+            "target": "Package",
+            "version": "[4.5.0, )"
+          },
           "Microsoft.Extensions.Configuration": {
             "target": "Package",
-            "version": "[8.0.3, )"
+            "version": "[9.0.0, )"
           },
           "Microsoft.Extensions.Configuration.Json": {
             "target": "Package",
-            "version": "[8.0.3, )"
+            "version": "[9.0.0, )"
           },
           "Microsoft.Extensions.DependencyInjection": {
             "target": "Package",
-            "version": "[8.0.3, )"
+            "version": "[9.0.0, )"
           },
           "Microsoft.Extensions.Hosting": {
             "target": "Package",
-            "version": "[8.0.3, )"
+            "version": "[9.0.0, )"
           },
           "Simplecto.Avalonia.RichTextBox": {
             "target": "Package",
             "version": "[1.3.9, )"
+          },
+          "System.Reactive": {
+            "target": "Package",
+            "version": "[6.0.1, )"
           }
         },
         "imports": [
@@ -7081,10 +7270,6 @@
             "version": "[8.0.13, 8.0.13]"
           },
           {
-            "name": "Microsoft.NETCore.App.Host.osx-arm64",
-            "version": "[8.0.13, 8.0.13]"
-          },
-          {
             "name": "Microsoft.NETCore.App.Ref",
             "version": "[8.0.13, 8.0.13]"
           }
@@ -7097,47 +7282,5 @@
         "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1603",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "ItemNotes.UI, Microsoft.Extensions.Configuration (>= 8.0.3) öğesine bağlı ancak Microsoft.Extensions.Configuration 8.0.3 bulunamadı. Bunun yerine Microsoft.Extensions.Configuration 9.0.0 çözümlendi.",
-      "libraryId": "Microsoft.Extensions.Configuration",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    },
-    {
-      "code": "NU1603",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "ItemNotes.UI, Microsoft.Extensions.Configuration.Json (>= 8.0.3) öğesine bağlı ancak Microsoft.Extensions.Configuration.Json 8.0.3 bulunamadı. Bunun yerine Microsoft.Extensions.Configuration.Json 9.0.0 çözümlendi.",
-      "libraryId": "Microsoft.Extensions.Configuration.Json",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    },
-    {
-      "code": "NU1603",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "ItemNotes.UI, Microsoft.Extensions.DependencyInjection (>= 8.0.3) öğesine bağlı ancak Microsoft.Extensions.DependencyInjection 8.0.3 bulunamadı. Bunun yerine Microsoft.Extensions.DependencyInjection 9.0.0 çözümlendi.",
-      "libraryId": "Microsoft.Extensions.DependencyInjection",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    },
-    {
-      "code": "NU1603",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "ItemNotes.UI, Microsoft.Extensions.Hosting (>= 8.0.3) öğesine bağlı ancak Microsoft.Extensions.Hosting 8.0.3 bulunamadı. Bunun yerine Microsoft.Extensions.Hosting 9.0.0 çözümlendi.",
-      "libraryId": "Microsoft.Extensions.Hosting",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    }
-  ]
+  }
 }
