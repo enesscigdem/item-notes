@@ -15,3 +15,4 @@
 /Users/enescigdem/Downloads/item-notes/src/ItemNotes.Application/obj/Debug/net8.0/refint/ItemNotes.Application.dll
 /Users/enescigdem/Downloads/item-notes/src/ItemNotes.Application/obj/Debug/net8.0/ItemNotes.Application.pdb
 /Users/enescigdem/Downloads/item-notes/src/ItemNotes.Application/obj/Debug/net8.0/ref/ItemNotes.Application.dll
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Application/obj/Debug/net8.0/ItemNotes.Application.sourcelink.json

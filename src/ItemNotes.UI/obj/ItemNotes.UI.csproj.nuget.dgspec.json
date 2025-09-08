@@ -282,11 +282,27 @@
           "dependencies": {
             "Avalonia": {
               "target": "Package",
-              "version": "[11.0.3, )"
+              "version": "[11.2.8, )"
+            },
+            "Avalonia.Controls.ItemsRepeater": {
+              "target": "Package",
+              "version": "[11.1.5, )"
+            },
+            "Avalonia.Desktop": {
+              "target": "Package",
+              "version": "[11.2.8, )"
             },
             "Avalonia.ReactiveUI": {
               "target": "Package",
-              "version": "[11.0.3, )"
+              "version": "[11.2.8, )"
+            },
+            "Avalonia.Skia": {
+              "target": "Package",
+              "version": "[11.2.8, )"
+            },
+            "Avalonia.Themes.Fluent": {
+              "target": "Package",
+              "version": "[11.2.8, )"
             },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
@@ -304,9 +320,9 @@
               "target": "Package",
               "version": "[8.0.3, )"
             },
-            "ReactiveUI": {
+            "Simplecto.Avalonia.RichTextBox": {
               "target": "Package",
-              "version": "[18.4.30, )"
+              "version": "[1.3.9, )"
             }
           },
           "imports": [

@@ -16,7 +16,7 @@ namespace ItemNotes.UI
     /// <summary>
     /// Uygulamanın giriş noktası ve DI yapılandırması.
     /// </summary>
-    public partial class App : Application
+    public partial class App : Avalonia.Application
     {
         private IHost? _host;
 

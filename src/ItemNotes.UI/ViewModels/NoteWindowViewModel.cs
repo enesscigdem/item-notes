@@ -6,7 +6,6 @@ using System.Reactive;
 using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Controls.Documents;
 using Avalonia.Media;
 using ItemNotes.Application.Interfaces;
 using ItemNotes.Domain.Entities;

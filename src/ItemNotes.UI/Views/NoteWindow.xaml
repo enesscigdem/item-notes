@@ -32,7 +32,7 @@
       </TabControl.ItemTemplate>
       <TabControl.ContentTemplate>
         <DataTemplate>
-          <RichTextBox Document="{Binding Document}" IsReadOnly="{Binding IsReadOnly}" />
+          <av:RichTextBox FlowDoc="{Binding Document}" IsReadOnly="{Binding IsReadOnly}" />
         </DataTemplate>
       </TabControl.ContentTemplate>
     </TabControl>

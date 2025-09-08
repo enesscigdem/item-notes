@@ -9,3 +9,4 @@
 /Users/enescigdem/Downloads/item-notes/src/ItemNotes.Domain/obj/Debug/net8.0/refint/ItemNotes.Domain.dll
 /Users/enescigdem/Downloads/item-notes/src/ItemNotes.Domain/obj/Debug/net8.0/ItemNotes.Domain.pdb
 /Users/enescigdem/Downloads/item-notes/src/ItemNotes.Domain/obj/Debug/net8.0/ref/ItemNotes.Domain.dll
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Domain/obj/Debug/net8.0/ItemNotes.Domain.sourcelink.json

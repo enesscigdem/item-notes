@@ -15,3 +15,4 @@
 /Users/enescigdem/Downloads/item-notes/src/ItemNotes.Infrastructure/obj/Debug/net8.0/ItemNotes.Infrastructure.pdb
 /Users/enescigdem/Downloads/item-notes/src/ItemNotes.Infrastructure/obj/Debug/net8.0/ItemNotes.Infrastructure.genruntimeconfig.cache
 /Users/enescigdem/Downloads/item-notes/src/ItemNotes.Infrastructure/obj/Debug/net8.0/ref/ItemNotes.Infrastructure.dll
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Infrastructure/obj/Debug/net8.0/ItemNotes.Infrastructure.sourcelink.json
