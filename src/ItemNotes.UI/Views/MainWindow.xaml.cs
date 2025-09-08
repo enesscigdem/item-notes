@@ -62,5 +62,11 @@ namespace ItemNotes.UI.Views
             var noteWindow = _serviceProvider.GetRequiredService<NoteWindow>();
             await noteWindow.ShowNoteAsync(noteId, this);
         }
+        // menüdeki çıkış düğmesi için basit kapatma
+        public void OnExit(object? sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
     }
 }

@@ -1,10 +1,15 @@
 using Avalonia.Controls;
 using ItemNotes.UI.ViewModels;
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls.Documents;
+using Avalonia.Interactivity;
+using Avalonia.Media;
 using AvRichTextBox;
+using ItemNotes.Domain.Enums;
+using ItemNotes.UI.Converters;
 
 namespace ItemNotes.UI.Views
 {
@@ -64,6 +69,37 @@ namespace ItemNotes.UI.Views
                 return string.Empty;
             });
             return string.Join("\n", texts);
+        }
+        public void OnCloseClick(object? sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        // Renk değiştirme menüsü – notun rengini günceller ve veritabanına kaydeder
+        public async void ChangeColorYellow(object? sender, RoutedEventArgs e)
+        {
+            await ChangeColor(NoteColor.Yellow);
+        }
+
+        public async void ChangeColorGreen(object? sender, RoutedEventArgs e)
+        {
+            await ChangeColor(NoteColor.Green);
+        }
+
+        public async void ChangeColorRed(object? sender, RoutedEventArgs e)
+        {
+            await ChangeColor(NoteColor.Red);
+        }
+
+        private async Task ChangeColor(NoteColor color)
+        {
+            if (_viewModel.Note != null && _viewModel.Note.Color != color)
+            {
+                _viewModel.Note.Color = color;
+                await _viewModel.NoteService.UpdateNoteAsync(_viewModel.Note);
+                // Arayüz rengini güncellemek için DataContext’e bildirim gönderebilirsiniz
+                this.Background = new NoteColorToBrushConverter().Convert(color, typeof(IBrush), null, CultureInfo.InvariantCulture) as IBrush;
+            }
         }
     }
 }
