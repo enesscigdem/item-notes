@@ -5,8 +5,8 @@
     xmlns:avRichTextBox="clr-namespace:AvRichTextBox;assembly=AvRichTextBox"
     x:Class="ItemNotes.UI.Views.NoteWindow"
     Title="{Binding Note.Title}"
-    Width="700"
-    Height="550"
+    Width="820"
+    Height="600"
     RequestedThemeVariant="Light"
     SystemDecorations="None"
     WindowStartupLocation="CenterOwner">
@@ -15,79 +15,72 @@
         <conv:NoteColorToBrushConverter x:Key="NoteColorToBrushConverter"/>
     </Window.Resources>
 
-    <!-- Renk ve yuvarlak köşe -->
+    <!-- Ana kapsayıcı (arka planı not rengi) -->
     <Border x:Name="RootBorder"
             Background="{Binding Note.Color, Converter={StaticResource NoteColorToBrushConverter}}"
-            CornerRadius="12"
-            Padding="0">
+            CornerRadius="16"
+            Padding="0"
+            BorderThickness="2"
+            BorderBrush="#2A000000">
 
         <DockPanel>
-            <!-- Menü ve başlık -->
-            <Grid DockPanel.Dock="Top"
-                  Background="{Binding Note.Color, Converter={StaticResource NoteColorToBrushConverter}}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
 
-                <Menu>
-                    <MenuItem Header="_Dosya">
-                        <MenuItem Header="_Yeni Sayfa" Command="{Binding AddPageCommand}"/>
-                        <Separator/>
-                        <MenuItem Header="_Kapat" Click="OnCloseClick"/>
-                    </MenuItem>
+            <!-- Üst başlık+menü (yarı şeffaf panel hissi) -->
+            <Border DockPanel.Dock="Top" Background="#19FFFFFF" Padding="6,4">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
 
-                    <MenuItem Header="_Düzen">
-                        <MenuItem Header="_Kalın"       Command="{Binding BoldCommand}"/>
-                        <MenuItem Header="_İtalik"      Command="{Binding ItalicCommand}"/>
-                        <MenuItem Header="_Altı Çizili" Command="{Binding UnderlineCommand}"/>
-                        <MenuItem Header="_Üstü Çizili" Command="{Binding StrikethroughCommand}"/>
-                        <MenuItem Header="_Madde İşareti" Command="{Binding BulletListCommand}"/>
-                        <MenuItem Header="_Bağlantı"    Command="{Binding InsertLinkCommand}"/>
-                    </MenuItem>
+                    <Menu>
+                        <MenuItem Header="_Dosya">
+                            <MenuItem Header="_Yeni Sayfa" Command="{Binding AddPageCommand}"/>
+                            <Separator/>
+                            <MenuItem Header="_Kapat" Click="OnCloseClick"/>
+                        </MenuItem>
 
-                    <MenuItem Header="_Ekle">
-                        <MenuItem Header="_Resim…" Command="{Binding InsertImageCommand}"/>
-                        <MenuItem Header="_Tablo"   Command="{Binding InsertTableCommand}"/>
-                        <MenuItem Header="_Sembol"  Command="{Binding InsertSymbolCommand}"/>
-                    </MenuItem>
+                        <MenuItem Header="_Düzen">
+                            <MenuItem Header="_Kalın"       Command="{Binding BoldCommand}"/>
+                            <MenuItem Header="_İtalik"      Command="{Binding ItalicCommand}"/>
+                            <MenuItem Header="_Altı Çizili" Command="{Binding UnderlineCommand}"/>
+                            <MenuItem Header="_Üstü Çizili" Command="{Binding StrikethroughCommand}"/>
+                            <MenuItem Header="_Madde İşareti" Command="{Binding BulletListCommand}"/>
+                            <MenuItem Header="_Bağlantı"    Command="{Binding InsertLinkCommand}"/>
+                        </MenuItem>
 
-                    <MenuItem Header="_Renk">
-                        <MenuItem Header="Sarı"   Click="ChangeColorYellow"/>
-                        <MenuItem Header="Yeşil"  Click="ChangeColorGreen"/>
-                        <MenuItem Header="Kırmızı" Click="ChangeColorRed"/>
-                    </MenuItem>
-                </Menu>
+                        <MenuItem Header="_Ekle">
+                            <MenuItem Header="_Resim…" Command="{Binding InsertImageCommand}"/>
+                            <MenuItem Header="_Tablo"   Command="{Binding InsertTableCommand}"/>
+                            <MenuItem Header="_Sembol"  Command="{Binding InsertSymbolCommand}"/>
+                        </MenuItem>
 
-                <!-- Sağ üstte kullanıcı ve tarih -->
-                <StackPanel Orientation="Horizontal"
-                            Grid.Column="1"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Center"
-                            Margin="0,0,5,0">
-                    <TextBlock Text="{Binding Note.CreatedBy}"
-                               Margin="0,0,10,0"
-                               Foreground="Black"/>
-                    <TextBlock Text="{Binding Note.CreatedAt, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}"
-                               Foreground="Black"/>
-                </StackPanel>
-            </Grid>
+                        <MenuItem Header="_Renk">
+                            <MenuItem Header="Sarı"   Click="ChangeColorYellow"/>
+                            <MenuItem Header="Yeşil"  Click="ChangeColorGreen"/>
+                            <MenuItem Header="Kırmızı" Click="ChangeColorRed"/>
+                        </MenuItem>
+                    </Menu>
 
-            <!-- Not içeriği, sekmeler -->
-            <TabControl ItemsSource="{Binding Pages}"
-                        SelectedItem="{Binding SelectedPage}">
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Spacing="8" Margin="8,0,4,0">
+                        <TextBlock Text="{Binding Note.CreatedBy}" Foreground="Black" />
+                        <TextBlock Text="·" Foreground="Black" />
+                        <TextBlock Text="{Binding Note.CreatedAt, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}" Foreground="Black"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- İçerik sekmeleri -->
+            <TabControl ItemsSource="{Binding Pages}" SelectedItem="{Binding SelectedPage}" Margin="8,6,8,10">
                 <TabControl.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Header}"
-                                   Foreground="Black"/>
+                        <TextBlock Text="{Binding Header}" Foreground="Black"/>
                     </DataTemplate>
                 </TabControl.ItemTemplate>
 
                 <TabControl.ContentTemplate>
                     <DataTemplate>
-                        <!-- Düz renkli arka plan; RichTextBox metni şeffaf zemin ve siyah renk -->
-                        <Border Background="{Binding Note.Color, Converter={StaticResource NoteColorToBrushConverter}}"
-                                Padding="10">
+                        <Border Background="#FFFFFF" CornerRadius="12" Padding="12">
                             <avRichTextBox:RichTextBox
                                 FlowDocument="{Binding Document}"
                                 IsReadOnly="{Binding IsReadOnly}"
@@ -97,6 +90,7 @@
                     </DataTemplate>
                 </TabControl.ContentTemplate>
             </TabControl>
+
         </DockPanel>
     </Border>
 </Window>

@@ -4,8 +4,8 @@
     xmlns:conv="clr-namespace:ItemNotes.UI.Converters"
     x:Class="ItemNotes.UI.Views.CreateNoteWindow"
     Title="Yeni Not"
-    Width="350"
-    Height="230"
+    Width="380"
+    Height="260"
     RequestedThemeVariant="Light"
     WindowStartupLocation="CenterOwner">
 
@@ -13,20 +13,15 @@
         <conv:NoteColorToTextConverter x:Key="NoteColorToTextConverter"/>
     </Window.Resources>
 
-    <!-- Yumuşak kenarlı, açık renkli panel -->
-    <Border CornerRadius="10"
-            Padding="14"
-            Background="#FFFDF9">
-        <StackPanel Spacing="8">
-            <TextBlock Text="Başlık:" Foreground="Black"/>
+    <Border CornerRadius="14" Padding="18" Background="#FFFDF9"
+            BorderThickness="2" BorderBrush="#2A000000">
+        <StackPanel Spacing="10">
+            <TextBlock Text="Başlık" Foreground="Black" />
             <TextBox Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     Background="#FFFFFF"
-                     Foreground="Black"/>
+                     Background="#FFFFFF" Foreground="Black" Watermark="Örn: Toplantı notu"/>
 
-            <TextBlock Text="Renk:" Margin="0,6,0,0" Foreground="Black"/>
-            <ComboBox ItemsSource="{Binding Colors}"
-                      SelectedItem="{Binding SelectedColor, Mode=TwoWay}"
-                      Background="#FFFFFF">
+            <TextBlock Text="Renk" Margin="0,6,0,0" Foreground="Black"/>
+            <ComboBox ItemsSource="{Binding Colors}" SelectedItem="{Binding SelectedColor, Mode=TwoWay}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding ., Converter={StaticResource NoteColorToTextConverter}}"
@@ -35,17 +30,13 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
 
-            <TextBlock Text="Oluşturan:" Margin="0,6,0,0" Foreground="Black"/>
+            <TextBlock Text="Oluşturan" Margin="0,6,0,0" Foreground="Black"/>
             <TextBox Text="{Binding CreatedBy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     Background="#EFEFEF"
-                     Foreground="Black"/>
+                     Background="#F2F2F2" Foreground="Black"/>
 
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Right"
-                        Margin="0,12,0,0"
-                        Spacing="10">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0" Spacing="10">
                 <Button Content="İptal"   Command="{Binding CancelCommand}"/>
-                <Button Content="Oluştur" Command="{Binding CreateCommand}"/>
+                <Button Content="Oluştur" Command="{Binding CreateCommand}" />
             </StackPanel>
         </StackPanel>
     </Border>
