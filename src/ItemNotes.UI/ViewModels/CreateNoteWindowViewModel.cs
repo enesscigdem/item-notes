@@ -1,16 +1,14 @@
-using ItemNotes.Application.Interfaces;
-using ItemNotes.Domain.Enums;
-using ReactiveUI;
 using System;
 using System.Collections.ObjectModel;
 using System.Reactive;
 using System.Threading.Tasks;
+using ItemNotes.Application.Interfaces;
+using ItemNotes.Domain.Enums;
+using ReactiveUI;
 
 namespace ItemNotes.UI.ViewModels
 {
-    /// <summary>
-    /// Yeni not oluşturma penceresi için ViewModel. Başlık, renk ve oluşturucu bilgisi alır.
-    /// </summary>
+    /// <summary>Yeni not oluşturma penceresi için VM.</summary>
     public class CreateNoteWindowViewModel : ReactiveObject
     {
         private readonly INoteService _noteService;
@@ -18,12 +16,15 @@ namespace ItemNotes.UI.ViewModels
         public CreateNoteWindowViewModel(INoteService noteService)
         {
             _noteService = noteService;
+
+            // ComboBox listesi (enum sabitleri)
             Colors = new ObservableCollection<NoteColor>
             {
                 NoteColor.Yellow,
                 NoteColor.Green,
                 NoteColor.Red
             };
+
             SelectedColor = NoteColor.Yellow;
             CreatedBy = Environment.UserName;
 
@@ -31,9 +32,7 @@ namespace ItemNotes.UI.ViewModels
             CancelCommand = ReactiveCommand.Create(() => CloseRequested?.Invoke(null));
         }
 
-        /// <summary>
-        /// Mevcut renk seçenekleri.
-        /// </summary>
+        // --- Form alanları ---
         public ObservableCollection<NoteColor> Colors { get; }
 
         private NoteColor _selectedColor;
@@ -50,26 +49,26 @@ namespace ItemNotes.UI.ViewModels
             set => this.RaiseAndSetIfChanged(ref _title, value);
         }
 
-        private string _createdBy;
+        private string _createdBy = string.Empty;
         public string CreatedBy
         {
             get => _createdBy;
             set => this.RaiseAndSetIfChanged(ref _createdBy, value);
         }
 
+        // --- Komutlar ---
         public ReactiveCommand<Unit, Unit> CreateCommand { get; }
         public ReactiveCommand<Unit, Unit> CancelCommand { get; }
 
         private async Task OnCreateAsync()
         {
             if (string.IsNullOrWhiteSpace(Title)) return;
+
             var note = await _noteService.CreateNoteAsync(Title, SelectedColor, CreatedBy);
+            // Pencereyi kapat, sonucu (oluşan notun Id'si) geri ver
             CloseRequested?.Invoke(note.Id);
         }
 
-        /// <summary>
-        /// Pencereyi kapatıp sonucu döndürmek için olay. Parametre olarak oluşturulan notun kimliği veya null döner.
-        /// </summary>
         public event Action<Guid?>? CloseRequested;
     }
 }

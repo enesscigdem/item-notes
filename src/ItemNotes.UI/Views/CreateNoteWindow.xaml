@@ -2,20 +2,35 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:vm="clr-namespace:ItemNotes.UI.ViewModels"
+    xmlns:conv="clr-namespace:ItemNotes.UI.Converters"
     x:Class="ItemNotes.UI.Views.CreateNoteWindow"
     Title="Yeni Not"
-    Width="400" Height="250">
+    Width="400" Height="260">
 
-    <StackPanel Margin="10" Spacing="6">
+    <Window.Resources>
+        <conv:NoteColorToTextConverter x:Key="NoteColorToTextConverter" />
+    </Window.Resources>
+
+    <StackPanel Margin="14" Spacing="8">
         <TextBlock Text="Başlık:"/>
-        <TextBox Text="{Binding Title}" />
-        <TextBlock Text="Renk:" Margin="0,8,0,0"/>
-        <!-- Items -> ItemsSource -->
-        <ComboBox ItemsSource="{Binding Colors}" SelectedItem="{Binding SelectedColor}" />
-        <TextBlock Text="Oluşturan:" Margin="0,8,0,0"/>
-        <TextBox Text="{Binding CreatedBy}" />
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0" Spacing="10">
-            <Button Content="İptal" Command="{Binding CancelCommand}" />
+        <TextBox Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+        <TextBlock Text="Renk:" Margin="0,6,0,0"/>
+        <ComboBox
+            ItemsSource="{Binding Colors}"
+            SelectedItem="{Binding SelectedColor, Mode=TwoWay}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding ., Converter={StaticResource NoteColorToTextConverter}}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <TextBlock Text="Oluşturan:" Margin="0,6,0,0"/>
+        <TextBox Text="{Binding CreatedBy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0" Spacing="10">
+            <Button Content="İptal"   Command="{Binding CancelCommand}" />
             <Button Content="Oluştur" Command="{Binding CreateCommand}" />
         </StackPanel>
     </StackPanel>
