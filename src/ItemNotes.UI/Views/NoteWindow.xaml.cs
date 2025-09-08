@@ -3,7 +3,8 @@ using ItemNotes.UI.ViewModels;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Avalonia.Documents;
+using Avalonia.Controls.Documents;
+using AvRichTextBox;
 
 namespace ItemNotes.UI.Views
 {
