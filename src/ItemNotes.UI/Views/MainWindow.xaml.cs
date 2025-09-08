@@ -34,22 +34,23 @@ namespace ItemNotes.UI.Views
         private async void OnCreateNoteRequested()
         {
             var createWindow = _serviceProvider.GetRequiredService<CreateNoteWindow>();
-            // ViewModel'i al ve event bağla
-            if (createWindow.DataContext is CreateNoteWindowViewModel vm)
+
+            // DataContext yoksa DI'dan al ve ata
+            if (createWindow.DataContext is not CreateNoteWindowViewModel vm)
             {
-                vm.CloseRequested += async id =>
-                {
-                    createWindow.Close();
-                    if (id.HasValue)
-                    {
-                        await _viewModel.LoadNotesAsync();
-                        // Oluşturulan notu hemen aç
-                        await OnOpenNoteAsync(id.Value);
-                    }
-                };
+                var vmFromDi = _serviceProvider.GetRequiredService<CreateNoteWindowViewModel>();
+                createWindow.DataContext = vmFromDi;
             }
-            await createWindow.ShowDialog(this);
+
+            // Pencere kapandığında sonucu almak için generic ShowDialog kullan
+            var result = await createWindow.ShowDialog<Guid?>(this);
+            if (result.HasValue)
+            {
+                await _viewModel.LoadNotesAsync();
+                await OnOpenNoteAsync(result.Value);
+            }
         }
+
 
         private async void OnOpenNoteRequested(Guid noteId)
         {
