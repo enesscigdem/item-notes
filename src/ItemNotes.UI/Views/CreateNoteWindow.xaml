@@ -5,13 +5,15 @@
     xmlns:conv="clr-namespace:ItemNotes.UI.Converters"
     x:Class="ItemNotes.UI.Views.CreateNoteWindow"
     Title="Yeni Not"
-    Width="400" Height="260">
+    Width="400" Height="260"
+    Background="#F9F9F9">
 
     <Window.Resources>
         <conv:NoteColorToTextConverter x:Key="NoteColorToTextConverter" />
     </Window.Resources>
 
-    <StackPanel Margin="14" Spacing="8">
+    <Border Background="White" Padding="14" CornerRadius="6">
+    <StackPanel Spacing="8">
         <TextBlock Text="Başlık:"/>
         <TextBox Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
@@ -34,4 +36,5 @@
             <Button Content="Oluştur" Command="{Binding CreateCommand}" />
         </StackPanel>
     </StackPanel>
+    </Border>
 </Window>

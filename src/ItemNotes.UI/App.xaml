@@ -3,8 +3,8 @@
              xmlns:converters="clr-namespace:ItemNotes.UI.Converters"
              x:Class="ItemNotes.UI.App">
     <Application.Styles>
-        <!-- Default Fluent theme -->
-        <FluentTheme />
+        <!-- Light Fluent theme for a clean, professional look -->
+        <FluentTheme Mode="Light" />
     </Application.Styles>
     <Application.Resources>
         <!-- Global converters -->

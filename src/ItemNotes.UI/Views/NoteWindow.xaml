@@ -2,11 +2,17 @@
   xmlns="https://github.com/avaloniaui"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:vm="clr-namespace:ItemNotes.UI.ViewModels"
+  xmlns:conv="clr-namespace:ItemNotes.UI.Converters"
   xmlns:avrtb="clr-namespace:AvRichTextBox;assembly=Simplecto.Avalonia.RichTextBox"
   xmlns:avRichTextBox="clr-namespace:AvRichTextBox;assembly=AvRichTextBox"
   x:Class="ItemNotes.UI.Views.NoteWindow"
   Title="Not Düzenleyici"
-  Width="900" Height="700">
+  Width="900" Height="700"
+  Background="{Binding Note.Color, Converter={StaticResource NoteColorToBrushConverter}}">
+
+  <Window.Resources>
+    <conv:NoteColorToBrushConverter x:Key="NoteColorToBrushConverter" />
+  </Window.Resources>
 
   <DockPanel Margin="10">
     <ScrollViewer DockPanel.Dock="Top" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
@@ -25,7 +31,8 @@
     </ScrollViewer>
 
     <!-- Items -> ItemsSource -->
-    <TabControl ItemsSource="{Binding Pages}" SelectedItem="{Binding SelectedPage}" Margin="0,10,0,0">
+    <Border Background="White" CornerRadius="6" Margin="0,10,0,0" Padding="10">
+    <TabControl ItemsSource="{Binding Pages}" SelectedItem="{Binding SelectedPage}">
       <TabControl.ItemTemplate>
         <DataTemplate>
           <TextBlock Text="{Binding Header}" />
@@ -41,6 +48,7 @@
         </DataTemplate>
       </TabControl.ContentTemplate>
     </TabControl>
+    </Border>
 
     <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0" Spacing="10">
       <TextBlock Text="{Binding Note.CreatedBy}" />
