@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2g0iIzgmC1g=",
+  "dgSpecHash": "Z0bbLhIAXLA=",
   "success": true,
   "projectFilePath": "/Users/enescigdem/Downloads/item-notes/src/ItemNotes.UI/ItemNotes.UI.csproj",
   "expectedPackageFiles": [
@@ -141,7 +141,8 @@
     "/Users/enescigdem/.nuget/packages/system.windows.extensions/6.0.0/system.windows.extensions.6.0.0.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/tmds.dbus.protocol/0.20.0/tmds.dbus.protocol.0.20.0.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/microsoft.netcore.app.ref/8.0.13/microsoft.netcore.app.ref.8.0.13.nupkg.sha512",
-    "/Users/enescigdem/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.13/microsoft.aspnetcore.app.ref.8.0.13.nupkg.sha512"
+    "/Users/enescigdem/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.13/microsoft.aspnetcore.app.ref.8.0.13.nupkg.sha512",
+    "/Users/enescigdem/.nuget/packages/microsoft.netcore.app.host.osx-arm64/8.0.13/microsoft.netcore.app.host.osx-arm64.8.0.13.nupkg.sha512"
   ],
   "logs": []
 }

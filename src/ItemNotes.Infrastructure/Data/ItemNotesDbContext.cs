@@ -1,55 +1,54 @@
+using System;
+using System.IO;
 using ItemNotes.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace ItemNotes.Infrastructure.Data
 {
-    /// <summary>
-    /// Uygulamanın Entity Framework Core veri bağlamı. SQL Server kullanır.
-    /// </summary>
     public class ItemNotesDbContext : DbContext
     {
-        public ItemNotesDbContext(DbContextOptions<ItemNotesDbContext> options)
-            : base(options)
+        // Uygulama çalışma zamanı (DI) için kullanılan ctor
+        public ItemNotesDbContext(DbContextOptions<ItemNotesDbContext> options) : base(options)
         {
         }
 
-        /// <summary>
-        /// Tablolar: Notlar.
-        /// </summary>
+        // DESIGN-TIME için parametresiz ctor (EF Tools bunu kullanır)
+        public ItemNotesDbContext()
+        {
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            // Eğer zaten SQL Server PROVIDER’ı verilmişse çık.
+            // (İç tipe dokunmadan basit bir kontrol)
+            var providerAlreadySet = optionsBuilder.Options.Extensions
+                .Any(e => e.GetType().Name.Contains("SqlServerOptionsExtension", StringComparison.OrdinalIgnoreCase));
+
+            if (providerAlreadySet)
+                return;
+
+            // Runtime için sağlam base path
+            var basePath = AppContext.BaseDirectory;
+
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(basePath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true) // UI output’taki dosya
+                .Build();
+
+            var conn = configuration.GetConnectionString("DefaultConnection")
+                       ?? Environment.GetEnvironmentVariable("ITEMNOTES__CONNSTR");
+
+            if (string.IsNullOrWhiteSpace(conn))
+                throw new InvalidOperationException(
+                    "Connection string bulunamadı. 'appsettings.json' içine ConnectionStrings:DefaultConnection ekleyin veya ITEMNOTES__CONNSTR ortam değişkenini ayarlayın.");
+
+            optionsBuilder.UseSqlServer(conn, b =>
+                b.MigrationsAssembly(typeof(ItemNotesDbContext).Assembly.FullName));
+        }
+
+
         public DbSet<Note> Notes => Set<Note>();
-
-        /// <summary>
-        /// Tablolar: Not sayfaları.
-        /// </summary>
         public DbSet<NotePage> NotePages => Set<NotePage>();
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            // Note konfigürasyonu
-            modelBuilder.Entity<Note>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.Title).IsRequired().HasMaxLength(200);
-                entity.Property(e => e.Color).IsRequired();
-                entity.Property(e => e.CreatedBy).HasMaxLength(100);
-                entity.Property(e => e.CreatedAt).HasDefaultValueSql("getutcdate()");
-
-                entity.HasMany(e => e.Pages)
-                      .WithOne(p => p.Note)
-                      .HasForeignKey(p => p.NoteId)
-                      .OnDelete(DeleteBehavior.Cascade);
-            });
-
-            // NotePage konfigürasyonu
-            modelBuilder.Entity<NotePage>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.Content).HasColumnType("nvarchar(max)");
-                entity.Property(e => e.PageIndex).IsRequired();
-                entity.Property(e => e.IsReadOnly).HasDefaultValue(false);
-            });
-        }
     }
 }

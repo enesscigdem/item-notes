@@ -2,11 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- Burada EF paketi gerekmiyor; bağımlılıklar Infrastructure üzerinden gelir -->
     <ProjectReference Include="..\ItemNotes.Domain\ItemNotes.Domain.csproj" />
     <ProjectReference Include="..\ItemNotes.Infrastructure\ItemNotes.Infrastructure.csproj" />
   </ItemGroup>
