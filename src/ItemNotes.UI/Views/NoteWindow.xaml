@@ -1,65 +1,60 @@
 <Window
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:vm="clr-namespace:ItemNotes.UI.ViewModels"
     xmlns:conv="clr-namespace:ItemNotes.UI.Converters"
     xmlns:avRichTextBox="clr-namespace:AvRichTextBox;assembly=AvRichTextBox"
     x:Class="ItemNotes.UI.Views.NoteWindow"
     Title="{Binding Note.Title}"
     Width="700"
     Height="550"
+    RequestedThemeVariant="Light"
     SystemDecorations="None"
     WindowStartupLocation="CenterOwner">
 
     <Window.Resources>
         <conv:NoteColorToBrushConverter x:Key="NoteColorToBrushConverter"/>
-        <!-- Çizgili kağıt arkaplanı, Assets/lined_paper.png eklenmeli -->
-        <ImageBrush x:Key="LinedBackgroundBrush"
-                    Source="avares://ItemNotes.UI/Assets/lined_paper.png"
-                    TileMode="Tile"
-                    Stretch="None"/>
-
     </Window.Resources>
 
-    <!-- Yuvarlatılmış, renkli ana panel -->
-    <Border Background="{Binding Note.Color, Converter={StaticResource NoteColorToBrushConverter}}"
+    <!-- Renk ve yuvarlak köşe -->
+    <Border x:Name="RootBorder"
+            Background="{Binding Note.Color, Converter={StaticResource NoteColorToBrushConverter}}"
             CornerRadius="12"
             Padding="0">
 
         <DockPanel>
-            <!-- Başlık ve menü -->
-            <Grid DockPanel.Dock="Top" Background="{Binding Note.Color, Converter={StaticResource NoteColorToBrushConverter}}">
+            <!-- Menü ve başlık -->
+            <Grid DockPanel.Dock="Top"
+                  Background="{Binding Note.Color, Converter={StaticResource NoteColorToBrushConverter}}">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
                 <Menu>
                     <MenuItem Header="_Dosya">
-                        <MenuItem Header="_Yeni Sayfa"  Command="{Binding AddPageCommand}" />
+                        <MenuItem Header="_Yeni Sayfa" Command="{Binding AddPageCommand}"/>
                         <Separator/>
                         <MenuItem Header="_Kapat" Click="OnCloseClick"/>
                     </MenuItem>
 
                     <MenuItem Header="_Düzen">
-                        <MenuItem Header="_Kalın"  Command="{Binding BoldCommand}" />
-                        <MenuItem Header="_İtalik" Command="{Binding ItalicCommand}" />
-                        <MenuItem Header="_Altı Çizili"     Command="{Binding UnderlineCommand}" />
-                        <MenuItem Header="_Üstü Çizili"      Command="{Binding StrikethroughCommand}" />
-                        <MenuItem Header="_Madde İşareti"    Command="{Binding BulletListCommand}" />
-                        <MenuItem Header="_Bağlantı"         Command="{Binding InsertLinkCommand}" />
+                        <MenuItem Header="_Kalın"       Command="{Binding BoldCommand}"/>
+                        <MenuItem Header="_İtalik"      Command="{Binding ItalicCommand}"/>
+                        <MenuItem Header="_Altı Çizili" Command="{Binding UnderlineCommand}"/>
+                        <MenuItem Header="_Üstü Çizili" Command="{Binding StrikethroughCommand}"/>
+                        <MenuItem Header="_Madde İşareti" Command="{Binding BulletListCommand}"/>
+                        <MenuItem Header="_Bağlantı"    Command="{Binding InsertLinkCommand}"/>
                     </MenuItem>
 
                     <MenuItem Header="_Ekle">
-                        <MenuItem Header="_Resim…" Command="{Binding InsertImageCommand}" />
-                        <MenuItem Header="_Tablo"   Command="{Binding InsertTableCommand}" />
-                        <MenuItem Header="_Sembol"  Command="{Binding InsertSymbolCommand}" />
+                        <MenuItem Header="_Resim…" Command="{Binding InsertImageCommand}"/>
+                        <MenuItem Header="_Tablo"   Command="{Binding InsertTableCommand}"/>
+                        <MenuItem Header="_Sembol"  Command="{Binding InsertSymbolCommand}"/>
                     </MenuItem>
 
-                    <!-- Renk değiştirme -->
                     <MenuItem Header="_Renk">
-                        <MenuItem Header="Sarı" Click="ChangeColorYellow"/>
-                        <MenuItem Header="Yeşil" Click="ChangeColorGreen"/>
+                        <MenuItem Header="Sarı"   Click="ChangeColorYellow"/>
+                        <MenuItem Header="Yeşil"  Click="ChangeColorGreen"/>
                         <MenuItem Header="Kırmızı" Click="ChangeColorRed"/>
                     </MenuItem>
                 </Menu>
@@ -70,27 +65,34 @@
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             Margin="0,0,5,0">
-                    <TextBlock Text="{Binding Note.CreatedBy}" Margin="0,0,10,0"/>
-                    <TextBlock Text="{Binding Note.CreatedAt, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}"/>
+                    <TextBlock Text="{Binding Note.CreatedBy}"
+                               Margin="0,0,10,0"
+                               Foreground="Black"/>
+                    <TextBlock Text="{Binding Note.CreatedAt, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}"
+                               Foreground="Black"/>
                 </StackPanel>
             </Grid>
 
-            <!-- Not içerikleri -->
-            <TabControl ItemsSource="{Binding Pages}" SelectedItem="{Binding SelectedPage}">
+            <!-- Not içeriği, sekmeler -->
+            <TabControl ItemsSource="{Binding Pages}"
+                        SelectedItem="{Binding SelectedPage}">
                 <TabControl.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Header}" />
+                        <TextBlock Text="{Binding Header}"
+                                   Foreground="Black"/>
                     </DataTemplate>
                 </TabControl.ItemTemplate>
 
                 <TabControl.ContentTemplate>
                     <DataTemplate>
-                        <!-- Çizgili kâğıt ve renkli arka plan -->
-                        <Border Background="{StaticResource LinedBackgroundBrush}" Padding="10">
+                        <!-- Düz renkli arka plan; RichTextBox metni şeffaf zemin ve siyah renk -->
+                        <Border Background="{Binding Note.Color, Converter={StaticResource NoteColorToBrushConverter}}"
+                                Padding="10">
                             <avRichTextBox:RichTextBox
                                 FlowDocument="{Binding Document}"
                                 IsReadOnly="{Binding IsReadOnly}"
-                                Background="Transparent"/>
+                                Background="Transparent"
+                                Foreground="Black"/>
                         </Border>
                     </DataTemplate>
                 </TabControl.ContentTemplate>

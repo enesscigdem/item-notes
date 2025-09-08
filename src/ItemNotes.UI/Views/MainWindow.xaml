@@ -5,21 +5,28 @@
     xmlns:conv="clr-namespace:ItemNotes.UI.Converters"
     x:Class="ItemNotes.UI.Views.MainWindow"
     Title="Item Notes"
-    Width="600"
-    Height="450">
+    Width="700"
+    Height="500"
+    RequestedThemeVariant="Light">
+
     <Window.Resources>
         <conv:NoteColorToBrushConverter x:Key="NoteColorToBrushConverter"/>
+        <!-- Seçili olmadığında butonları devre dışı bırakmak için -->
+        <conv:NullToBoolConverter x:Key="NullToBoolConverter"/>
     </Window.Resources>
 
     <DockPanel>
         <!-- Üst menü -->
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Dosya">
-                <MenuItem Header="_Yeni Not"  Command="{Binding CreateNoteCommand}" />
-                <MenuItem Header="_Seçileni Aç"  Command="{Binding OpenNoteCommand}" />
-                <MenuItem Header="_Seçileni Sil" Command="{Binding DeleteNoteCommand}" />
+                <MenuItem Header="_Yeni Not" Command="{Binding CreateNoteCommand}"/>
+                <MenuItem Header="_Seçileni Aç"
+                          Command="{Binding OpenNoteCommand}"
+                          IsEnabled="{Binding SelectedNote, Converter={StaticResource NullToBoolConverter}}"/>
+                <MenuItem Header="_Seçileni Sil"
+                          Command="{Binding DeleteNoteCommand}"
+                          IsEnabled="{Binding SelectedNote, Converter={StaticResource NullToBoolConverter}}"/>
                 <Separator/>
-                <!-- Çıkış menü öğesi, code‑behind’de OnExit tanımlanmalı -->
                 <MenuItem Header="_Çıkış" Click="OnExit"/>
             </MenuItem>
             <MenuItem Header="_Yardım">
@@ -27,25 +34,47 @@
             </MenuItem>
         </Menu>
 
-        <!-- Renkli not listesi -->
-        <ListBox ItemsSource="{Binding Notes}"
-                 SelectedItem="{Binding SelectedNote}"
-                 BorderThickness="0"
-                 Margin="10">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Border CornerRadius="8"
-                            Padding="8"
-                            Margin="5"
-                            Background="{Binding Color, Converter={StaticResource NoteColorToBrushConverter}}">
-                        <StackPanel>
-                            <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="16"/>
-                            <TextBlock Text="{Binding CreatedAt, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}"
-                                       FontSize="11"/>
-                        </StackPanel>
-                    </Border>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <!-- Menü altı kontrol butonları -->
+        <StackPanel Orientation="Horizontal"
+                    DockPanel.Dock="Top"
+                    Margin="10"
+                    Spacing="10">
+            <Button Content="Yeni Not" Command="{Binding CreateNoteCommand}"/>
+            <Button Content="Seçileni Aç"
+                    Command="{Binding OpenNoteCommand}"
+                    IsEnabled="{Binding SelectedNote, Converter={StaticResource NullToBoolConverter}}"/>
+            <Button Content="Seçileni Sil"
+                    Command="{Binding DeleteNoteCommand}"
+                    IsEnabled="{Binding SelectedNote, Converter={StaticResource NullToBoolConverter}}"/>
+        </StackPanel>
+
+        <!-- Not listesi -->
+        <ScrollViewer>
+            <ListBox ItemsSource="{Binding Notes}"
+                     SelectedItem="{Binding SelectedNote}"
+                     BorderThickness="0"
+                     Margin="10">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <!-- Her not için renkli kart -->
+                        <Border CornerRadius="8"
+                                Padding="10"
+                                Margin="5"
+                                Background="{Binding Color, Converter={StaticResource NoteColorToBrushConverter}}">
+                            <StackPanel>
+                                <!-- Siyah yazı ile okunaklı başlık ve tarih -->
+                                <TextBlock Text="{Binding Title}"
+                                           FontWeight="Bold"
+                                           FontSize="16"
+                                           Foreground="Black"/>
+                                <TextBlock Text="{Binding CreatedAt, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}"
+                                           FontSize="11"
+                                           Foreground="Black"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
     </DockPanel>
 </Window>
