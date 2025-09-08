@@ -1,0 +1,22 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:ItemNotes.UI.ViewModels"
+        x:Class="ItemNotes.UI.Views.CreateNoteWindow"
+        Title="Yeni Not"
+        Width="400" Height="250">
+  <Window.DataContext>
+    <vm:CreateNoteWindowViewModel />
+  </Window.DataContext>
+  <StackPanel Margin="10" Spacing="6">
+    <TextBlock Text="Başlık:"/>
+    <TextBox Text="{Binding Title}" />
+    <TextBlock Text="Renk:" Margin="0,8,0,0"/>
+    <ComboBox Items="{Binding Colors}" SelectedItem="{Binding SelectedColor}" />
+    <TextBlock Text="Oluşturan:" Margin="0,8,0,0"/>
+    <TextBox Text="{Binding CreatedBy}" />
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0" Spacing="10">
+      <Button Content="İptal" Command="{Binding CancelCommand}" />
+      <Button Content="Oluştur" Command="{Binding CreateCommand}" />
+    </StackPanel>
+  </StackPanel>
+</Window>

@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Avalonia çalıştırıldığında multiplatform olarak algılanır -->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.0.3" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.3" />
+    <PackageReference Include="ReactiveUI" Version="18.4.30" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ItemNotes.Application\ItemNotes.Application.csproj" />
+  </ItemGroup>
+
+</Project>

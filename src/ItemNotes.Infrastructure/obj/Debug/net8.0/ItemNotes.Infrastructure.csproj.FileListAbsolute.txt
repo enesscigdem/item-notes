@@ -1,0 +1,17 @@
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Infrastructure/bin/Debug/net8.0/ItemNotes.Infrastructure.deps.json
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Infrastructure/bin/Debug/net8.0/ItemNotes.Infrastructure.runtimeconfig.json
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Infrastructure/bin/Debug/net8.0/ItemNotes.Infrastructure.dll
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Infrastructure/bin/Debug/net8.0/ItemNotes.Infrastructure.pdb
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Infrastructure/bin/Debug/net8.0/ItemNotes.Domain.dll
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Infrastructure/bin/Debug/net8.0/ItemNotes.Domain.pdb
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Infrastructure/obj/Debug/net8.0/ItemNotes.Infrastructure.csproj.AssemblyReference.cache
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Infrastructure/obj/Debug/net8.0/ItemNotes.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Infrastructure/obj/Debug/net8.0/ItemNotes.Infrastructure.AssemblyInfoInputs.cache
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Infrastructure/obj/Debug/net8.0/ItemNotes.Infrastructure.AssemblyInfo.cs
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Infrastructure/obj/Debug/net8.0/ItemNotes.Infrastructure.csproj.CoreCompileInputs.cache
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Infrastructure/obj/Debug/net8.0/ItemNote.7D8EEFA4.Up2Date
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Infrastructure/obj/Debug/net8.0/ItemNotes.Infrastructure.dll
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Infrastructure/obj/Debug/net8.0/refint/ItemNotes.Infrastructure.dll
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Infrastructure/obj/Debug/net8.0/ItemNotes.Infrastructure.pdb
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Infrastructure/obj/Debug/net8.0/ItemNotes.Infrastructure.genruntimeconfig.cache
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Infrastructure/obj/Debug/net8.0/ref/ItemNotes.Infrastructure.dll

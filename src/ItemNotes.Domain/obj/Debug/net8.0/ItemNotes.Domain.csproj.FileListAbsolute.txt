@@ -1,0 +1,11 @@
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Domain/bin/Debug/net8.0/ItemNotes.Domain.deps.json
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Domain/bin/Debug/net8.0/ItemNotes.Domain.dll
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Domain/bin/Debug/net8.0/ItemNotes.Domain.pdb
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Domain/obj/Debug/net8.0/ItemNotes.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Domain/obj/Debug/net8.0/ItemNotes.Domain.AssemblyInfoInputs.cache
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Domain/obj/Debug/net8.0/ItemNotes.Domain.AssemblyInfo.cs
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Domain/obj/Debug/net8.0/ItemNotes.Domain.csproj.CoreCompileInputs.cache
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Domain/obj/Debug/net8.0/ItemNotes.Domain.dll
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Domain/obj/Debug/net8.0/refint/ItemNotes.Domain.dll
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Domain/obj/Debug/net8.0/ItemNotes.Domain.pdb
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Domain/obj/Debug/net8.0/ref/ItemNotes.Domain.dll

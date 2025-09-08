@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "gMBzxWb5/d0=",
+  "success": true,
+  "projectFilePath": "/Users/enescigdem/Downloads/item-notes/src/ItemNotes.Domain/ItemNotes.Domain.csproj",
+  "expectedPackageFiles": [
+    "/Users/enescigdem/.nuget/packages/microsoft.netcore.app.ref/8.0.13/microsoft.netcore.app.ref.8.0.13.nupkg.sha512",
+    "/Users/enescigdem/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.13/microsoft.aspnetcore.app.ref.8.0.13.nupkg.sha512"
+  ],
+  "logs": []
+}

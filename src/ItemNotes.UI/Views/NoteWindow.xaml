@@ -1,0 +1,45 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:ItemNotes.UI.ViewModels"
+        x:Class="ItemNotes.UI.Views.NoteWindow"
+        Title="Not Düzenleyici"
+        Width="900" Height="700">
+  <Window.DataContext>
+    <vm:NoteWindowViewModel />
+  </Window.DataContext>
+  <DockPanel Margin="10">
+    <!-- Araç çubuğu -->
+    <ScrollViewer DockPanel.Dock="Top" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
+      <StackPanel Orientation="Horizontal" Spacing="5">
+        <Button Content="Kalın" Command="{Binding BoldCommand}" />
+        <Button Content="İtalik" Command="{Binding ItalicCommand}" />
+        <Button Content="Altı Çizili" Command="{Binding UnderlineCommand}" />
+        <Button Content="Üstü Çizili" Command="{Binding StrikethroughCommand}" />
+        <Button Content="Madde İşareti" Command="{Binding BulletListCommand}" />
+        <Button Content="Resim Ekle" Command="{Binding InsertImageCommand}" />
+        <Button Content="Tablo Ekle" Command="{Binding InsertTableCommand}" />
+        <Button Content="Sembol Ekle" Command="{Binding InsertSymbolCommand}" />
+        <Button Content="Bağlantı" Command="{Binding InsertLinkCommand}" />
+        <Button Content="Sayfa Ekle" Command="{Binding AddPageCommand}" />
+      </StackPanel>
+    </ScrollViewer>
+    <!-- Sayfalar -->
+    <TabControl Items="{Binding Pages}" SelectedItem="{Binding SelectedPage}" Margin="0,10,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+      <TabControl.ItemTemplate>
+        <DataTemplate>
+          <TextBlock Text="{Binding Header}" />
+        </DataTemplate>
+      </TabControl.ItemTemplate>
+      <TabControl.ContentTemplate>
+        <DataTemplate>
+          <RichTextBox Document="{Binding Document}" IsReadOnly="{Binding IsReadOnly}" />
+        </DataTemplate>
+      </TabControl.ContentTemplate>
+    </TabControl>
+    <!-- Alt bilgi -->
+    <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0" Spacing="10">
+      <TextBlock Text="{Binding Note.CreatedBy}" />
+      <TextBlock Text="{Binding Note.CreatedAt, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}" />
+    </StackPanel>
+  </DockPanel>
+</Window>

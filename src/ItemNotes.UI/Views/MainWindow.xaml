@@ -1,0 +1,33 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:ItemNotes.UI.ViewModels"
+        xmlns:conv="clr-namespace:ItemNotes.UI.Converters"
+        x:Class="ItemNotes.UI.Views.MainWindow"
+        Title="Item Notes"
+        Width="800" Height="600">
+  <Window.DataContext>
+    <vm:MainWindowViewModel/>
+  </Window.DataContext>
+  <DockPanel Margin="10">
+    <!-- Üst menü çubuğu -->
+    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Left" Spacing="5">
+      <Button Content="Yeni Not" Command="{Binding CreateNoteCommand}" />
+      <Button Content="Seçileni Aç" Command="{Binding OpenNoteCommand}" />
+      <Button Content="Seçileni Sil" Command="{Binding DeleteNoteCommand}" />
+    </StackPanel>
+    <!-- Not listesi -->
+    <ListBox Items="{Binding Notes}" SelectedItem="{Binding SelectedNote}" Margin="0,10,0,0">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+            <Ellipse Width="16" Height="16" Fill="{Binding Color, Converter={StaticResource NoteColorToBrushConverter}}" />
+            <StackPanel>
+              <TextBlock Text="{Binding Title}" FontWeight="Bold" />
+              <TextBlock Text="{Binding CreatedAt, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}" FontSize="10" />
+            </StackPanel>
+          </StackPanel>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+  </DockPanel>
+</Window>

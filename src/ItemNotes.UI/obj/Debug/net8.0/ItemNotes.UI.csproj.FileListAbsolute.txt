@@ -1,0 +1,6 @@
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.UI/obj/Debug/net8.0/ItemNotes.UI.csproj.AssemblyReference.cache
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.UI/obj/Debug/net8.0/Avalonia/Resources.Inputs.cache
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.UI/obj/Debug/net8.0/ItemNotes.UI.GeneratedMSBuildEditorConfig.editorconfig
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.UI/obj/Debug/net8.0/ItemNotes.UI.AssemblyInfoInputs.cache
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.UI/obj/Debug/net8.0/ItemNotes.UI.AssemblyInfo.cs
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.UI/obj/Debug/net8.0/ItemNotes.UI.csproj.CoreCompileInputs.cache
