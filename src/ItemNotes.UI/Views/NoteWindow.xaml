@@ -3,6 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:conv="clr-namespace:ItemNotes.UI.Converters"
     xmlns:avRichTextBox="clr-namespace:AvRichTextBox;assembly=AvRichTextBox"
+    xmlns:views="clr-namespace:ItemNotes.UI.Views"
+    xmlns:controls="clr-namespace:ItemNotes.UI.Controls"
     x:Class="ItemNotes.UI.Views.NoteWindow"
     Title="{Binding Note.Title}"
     Width="900"
@@ -100,17 +102,10 @@
 
                 <TabControl.ContentTemplate>
                     <DataTemplate>
-                        <Border Background="#FFFFFF" CornerRadius="12" Padding="12">
-                            <avRichTextBox:RichTextBox
-                                x:Name="Editor"
-                                FlowDocument="{Binding Document}"
-                                IsReadOnly="{Binding IsReadOnly}"
-                                Background="Transparent"
-                                Foreground="Black"
-                                KeyDown="Editor_KeyDown"
-                                KeyUp="Editor_KeyUp"
-                                PointerReleased="Editor_PointerReleased"/>
-                        </Border>
+                        <Grid RowDefinitions="Auto,*">
+                            <controls:CkEditorView x:Name="Editor"
+                                                   Grid.Row="1"/>
+                        </Grid>
                     </DataTemplate>
                 </TabControl.ContentTemplate>
             </TabControl>

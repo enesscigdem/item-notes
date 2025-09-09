@@ -2,35 +2,29 @@ using System;
 using Avalonia.Controls;
 using ItemNotes.UI.ViewModels;
 
-namespace ItemNotes.UI.Views
+namespace ItemNotes.UI.Views;
+
+public partial class CreateNoteWindow : Window
 {
-    /// <summary>Yeni not oluşturma penceresi. DataContext dışarıdan verilmeli.</summary>
-    public partial class CreateNoteWindow : Window
+    private CreateNoteWindowViewModel? _vm;
+
+    public CreateNoteWindow(CreateNoteWindowViewModel vm)
     {
-        private CreateNoteWindowViewModel? _attachedVm;
+        InitializeComponent();
+        DataContext = vm;
+        _vm = vm;
 
-        public CreateNoteWindow()
-        {
-            InitializeComponent();
-        }
-
-        protected override void OnDataContextChanged(EventArgs e)
-        {
-            base.OnDataContextChanged(e);
-
-            // Eski VM varsa bağlantıyı kes
-            if (_attachedVm is not null)
-                _attachedVm.CloseRequested -= VmOnCloseRequested;
-
-            // Yeni VM varsa bağlan
-            _attachedVm = DataContext as CreateNoteWindowViewModel;
-            if (_attachedVm is not null)
-                _attachedVm.CloseRequested += VmOnCloseRequested;
-        }
-
-        private void VmOnCloseRequested(Guid? id)
-        {
-            Close(id);
-        }
+        // VM pencereyi kapatmak istediğinde sonucu (Guid?) döndürür
+        _vm.CloseRequested += id => Close(id);
     }
+
+    protected override void OnDataContextChanged(EventArgs e)
+    {
+        base.OnDataContextChanged(e);
+        if (_vm is not null) _vm.CloseRequested -= OnCloseRequested;
+        _vm = DataContext as CreateNoteWindowViewModel;
+        if (_vm is not null) _vm.CloseRequested += OnCloseRequested;
+    }
+
+    private void OnCloseRequested(Guid? id) => Close(id);
 }

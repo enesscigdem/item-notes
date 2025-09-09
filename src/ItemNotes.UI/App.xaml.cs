@@ -1,69 +1,77 @@
+using System;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+
+// Application & Infrastructure
 using ItemNotes.Application.Interfaces;
 using ItemNotes.Application.Services;
-using ItemNotes.Infrastructure.Data;
 using ItemNotes.Infrastructure.Repositories;
-using Microsoft.EntityFrameworkCore;
-using System;
+using ItemNotes.Infrastructure.Data;
 
-namespace ItemNotes.UI
+// UI
+using ItemNotes.UI.ViewModels;
+using ItemNotes.UI.Views;
+
+namespace ItemNotes.UI;
+
+public partial class App : Avalonia.Application
 {
-    /// <summary>
-    /// Uygulamanın giriş noktası ve DI yapılandırması.
-    /// </summary>
-    public partial class App : Avalonia.Application
+    private IServiceProvider? _serviceProvider;
+
+    public override void Initialize() => AvaloniaXamlLoader.Load(this);
+
+    public override void OnFrameworkInitializationCompleted()
     {
-        private IHost? _host;
-
-        public override void Initialize()
+        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            AvaloniaXamlLoader.Load(this);
+            _serviceProvider = BuildServiceProvider();
+
+            var vm = _serviceProvider.GetRequiredService<MainWindowViewModel>();
+            desktop.MainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+            desktop.MainWindow.DataContext = vm;
         }
 
-        public override void OnFrameworkInitializationCompleted()
-        {
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-            {
-                // Host builder oluşturarak DI ve konfigürasyon yapılandırılır
-                var builder = Host.CreateDefaultBuilder()
-                    .ConfigureAppConfiguration((hostingContext, config) =>
-                    {
-                        config.SetBasePath(AppContext.BaseDirectory);
-                        config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-                    })
-                    .ConfigureServices((context, services) =>
-                    {
-                        // EF Core: MSSQL bağlantısı
-                        services.AddDbContext<ItemNotesDbContext>(options =>
-                            options.UseSqlServer(context.Configuration.GetConnectionString("DefaultConnection")));
+        base.OnFrameworkInitializationCompleted();
+    }
 
-                        // Repository ve servisler
-                        services.AddScoped<INoteRepository, NoteRepository>();
-                        services.AddScoped<INoteService, NoteService>();
+    private IServiceProvider BuildServiceProvider()
+    {
+        var services = new ServiceCollection();
 
-                        // ViewModel ve View kayıtları
-                        services.AddTransient<ViewModels.MainWindowViewModel>();
-                        services.AddTransient<ViewModels.CreateNoteWindowViewModel>();
-                        services.AddTransient<ViewModels.NoteWindowViewModel>();
+        // --- Configuration ---
+        var config = new ConfigurationBuilder()
+            .SetBasePath(AppContext.BaseDirectory)
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+            .AddEnvironmentVariables()
+            .Build();
+        services.AddSingleton<IConfiguration>(config);
 
-                        services.AddTransient<Views.MainWindow>();
-                        services.AddTransient<Views.CreateNoteWindow>();
-                        services.AddTransient<Views.NoteWindow>();
-                    });
+        var connStr =
+            config.GetConnectionString("DefaultConnection")
+            ?? Environment.GetEnvironmentVariable("ITEMNOTES_CONNECTION")
+            ?? "Server=localhost;Database=item_notes_db;User Id=sa;Password=reallyStrongPwd123;TrustServerCertificate=true";
 
-                _host = builder.Build();
+        // --- EF Core ---
+        services.AddDbContext<ItemNotesDbContext>(opt => opt.UseSqlServer(connStr));
 
-                // Ana pencereyi DI üzerinden çöz
-                var mainWindow = _host.Services.GetRequiredService<Views.MainWindow>();
-                desktop.MainWindow = mainWindow;
-            }
+        // --- Repos & Services ---
+        services.AddScoped<INoteRepository, NoteRepository>();
+        services.AddScoped<INoteService, NoteService>();
 
-            base.OnFrameworkInitializationCompleted();
-        }
+        // --- ViewModels ---
+        services.AddTransient<MainWindowViewModel>();
+        services.AddTransient<CreateNoteWindowViewModel>();
+        services.AddTransient<NoteWindowViewModel>();
+
+        // --- Views (Windows) ---
+        services.AddTransient<MainWindow>();
+        services.AddTransient<CreateNoteWindow>();
+        services.AddTransient<NoteWindow>();      // <—— burada < > zorunlu, hatayı yapan buydu
+
+        return services.BuildServiceProvider();
     }
 }

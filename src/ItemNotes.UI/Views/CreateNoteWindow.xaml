@@ -1,43 +1,38 @@
 <Window
+    x:Class="ItemNotes.UI.Views.CreateNoteWindow"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:conv="clr-namespace:ItemNotes.UI.Converters"
-    x:Class="ItemNotes.UI.Views.CreateNoteWindow"
+    Width="520" Height="320"
     Title="Yeni Not"
-    Width="380"
-    Height="260"
-    RequestedThemeVariant="Light"
     WindowStartupLocation="CenterOwner">
 
-    <Window.Resources>
-        <conv:NoteColorToTextConverter x:Key="NoteColorToTextConverter"/>
-    </Window.Resources>
-
-    <Border CornerRadius="14" Padding="18" Background="#FFFDF9"
-            BorderThickness="2" BorderBrush="#2A000000">
-        <StackPanel Spacing="10">
-            <TextBlock Text="Başlık" Foreground="Black" />
-            <TextBox Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     Background="#FFFFFF" Foreground="Black" Watermark="Örn: Toplantı notu"/>
-
-            <TextBlock Text="Renk" Margin="0,6,0,0" Foreground="Black"/>
-            <ComboBox ItemsSource="{Binding Colors}" SelectedItem="{Binding SelectedColor, Mode=TwoWay}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding ., Converter={StaticResource NoteColorToTextConverter}}"
-                                   Foreground="Black"/>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-
-            <TextBlock Text="Oluşturan" Margin="0,6,0,0" Foreground="Black"/>
-            <TextBox Text="{Binding CreatedBy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     Background="#F2F2F2" Foreground="Black"/>
-
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,12,0,0" Spacing="10">
-                <Button Content="İptal"   Command="{Binding CancelCommand}"/>
+    <!-- Grid'e Padding verilemediği için Border ile sarıyoruz -->
+    <Border Padding="14">
+        <Grid RowDefinitions="Auto,*">
+            <StackPanel Orientation="Horizontal" Spacing="8">
                 <Button Content="Oluştur" Command="{Binding CreateCommand}" />
+                <Button Content="İptal"   Command="{Binding CancelCommand}" />
             </StackPanel>
-        </StackPanel>
+
+            <StackPanel Grid.Row="1" Margin="0,12,0,0" Spacing="10">
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBlock Text="Başlık" Width="80" VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding Title, Mode=TwoWay}" Width="360"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBlock Text="Renk" Width="80" VerticalAlignment="Center"/>
+                    <!-- Items -> ItemsSource düzeltildi -->
+                    <ComboBox ItemsSource="{Binding Colors}"
+                              SelectedItem="{Binding SelectedColor, Mode=TwoWay}"
+                              Width="180"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBlock Text="Oluşturan" Width="80" VerticalAlignment="Center"/>
+                    <TextBox Text="{Binding CreatedBy, Mode=TwoWay}" Width="240"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
     </Border>
 </Window>

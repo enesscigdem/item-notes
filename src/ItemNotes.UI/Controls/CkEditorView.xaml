@@ -1,0 +1,10 @@
+<UserControl
+    x:Class="ItemNotes.UI.Controls.CkEditorView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:wv="clr-namespace:AvaloniaWebView;assembly=WebView.Avalonia">
+    <Grid>
+        <!-- WebView.Avalonia kontrolü -->
+        <WebView x:Name="EditorHost"/>
+    </Grid>
+</UserControl>

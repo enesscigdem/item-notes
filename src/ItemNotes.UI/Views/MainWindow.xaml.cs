@@ -35,14 +35,13 @@ namespace ItemNotes.UI.Views
         {
             var createWindow = _serviceProvider.GetRequiredService<CreateNoteWindow>();
 
-            // DataContext yoksa DI'dan al ve ata
+            // (DataContext ctor ile zaten geliyor; aşağısı güvenlik amaçlı.)
             if (createWindow.DataContext is not CreateNoteWindowViewModel vm)
             {
                 var vmFromDi = _serviceProvider.GetRequiredService<CreateNoteWindowViewModel>();
                 createWindow.DataContext = vmFromDi;
             }
 
-            // Pencere kapandığında sonucu almak için generic ShowDialog kullan
             var result = await createWindow.ShowDialog<Guid?>(this);
             if (result.HasValue)
             {
@@ -50,6 +49,7 @@ namespace ItemNotes.UI.Views
                 await OnOpenNoteAsync(result.Value);
             }
         }
+
 
 
         private async void OnOpenNoteRequested(Guid noteId)

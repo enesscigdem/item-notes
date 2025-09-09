@@ -1,23 +1,17 @@
-using System;
 using Avalonia;
 using Avalonia.ReactiveUI;
+using Avalonia.WebView.Desktop; // <- önemli
 
-namespace ItemNotes.UI
+namespace ItemNotes.UI;
+
+internal static class Program
 {
-    /// <summary>
-    /// Uygulamanın giriş noktası. Avalonia konfigürasyonunu yapar ve masaüstü yaşam döngüsünü başlatır.
-    /// </summary>
-    internal class Program
-    {
-        [STAThread]
-        public static void Main(string[] args)
-        {
-            BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
-        }
+    public static AppBuilder BuildAvaloniaApp()
+        => AppBuilder.Configure<App>()
+            .UsePlatformDetect()
+            .LogToTrace()
+            .UseReactiveUI()
+            .UseDesktopWebView(); // <- önemli
 
-        public static AppBuilder BuildAvaloniaApp() =>
-            AppBuilder.Configure<App>()
-                .UsePlatformDetect()
-                .UseReactiveUI();
-    }
+    public static void Main(string[] args) => BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
 }

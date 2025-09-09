@@ -362,6 +362,14 @@
             "System.Reactive": {
               "target": "Package",
               "version": "[6.0.1, )"
+            },
+            "WebView.Avalonia": {
+              "target": "Package",
+              "version": "[11.0.0.1, )"
+            },
+            "WebView.Avalonia.Desktop": {
+              "target": "Package",
+              "version": "[11.0.0.1, )"
             }
           },
           "imports": [

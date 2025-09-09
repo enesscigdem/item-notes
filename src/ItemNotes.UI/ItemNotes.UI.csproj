@@ -33,8 +33,13 @@
 
         <!-- Resolve version conflict -->
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.5.0" />
+        <PackageReference Include="WebView.Avalonia" Version="11.0.0.1" />
+        <PackageReference Include="WebView.Avalonia.Desktop" Version="11.0.0.1" />
     </ItemGroup>
-
+    <ItemGroup>
+        <!-- CKEditor barındıran html sayfamız -->
+        <AvaloniaResource Include="Assets\editor.html" />
+    </ItemGroup>
     <!-- .xaml yerine de çalışsın (dosyaları .axaml yapacaksın ama emniyet olsun) -->
     <ItemGroup>
         <AvaloniaXaml Include="**\*.axaml" />

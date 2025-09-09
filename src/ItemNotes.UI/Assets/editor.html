@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.ckeditor.com data:;">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Editor</title>
+    <style>
+        html, body { height:100%; margin:0; }
+        .ck-editor__editable[role="textbox"]{ min-height: calc(100vh - 110px); }
+        .ck.ck-toolbar{ border-radius:0; }
+        body{ font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+    </style>
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/super-build/ckeditor.js"></script>
+</head>
+<body>
+<div id="editor"></div>
+
+<script>
+    function postHost(obj){
+        const json = JSON.stringify(obj);
+        try{
+            if (window.chrome?.webview) window.chrome.webview.postMessage(json);
+            else if (window.webkit?.messageHandlers?.webview) window.webkit.messageHandlers.webview.postMessage(json);
+            else if (window.external?.sendMessage) window.external.sendMessage(json);
+        }catch{}
+    }
+
+    let editor;
+    ClassicEditor.create(document.querySelector('#editor'),{
+        placeholder:'Notunuzu yazın…',
+        toolbar:{
+            items:[
+                'undo','redo','|',
+                'bold','italic','underline','strikethrough','removeFormat','|',
+                'fontFamily','fontSize','fontColor','fontBackgroundColor','|',
+                'bulletedList','numberedList','outdent','indent','|',
+                'link','insertTable','imageUpload','blockQuote','horizontalLine'
+            ],
+            shouldNotGroupWhenFull:true
+        },
+        fontSize:{ options:[8,10,12,14,16,18,20,24,28,32,48,64], supportAllValues:true },
+        table:{
+            contentToolbar:['tableColumn','tableRow','mergeTableCells','|','tableProperties','tableCellProperties']
+        },
+        link:{
+            decorators:{
+                openInNewTab:{ mode:'manual', label:'Yeni sekmede aç', defaultValue:true,
+                    attributes:{ target:'_blank', rel:'noopener noreferrer' } }
+            }
+        },
+        image:{ toolbar:[
+                'imageStyle:inline','imageStyle:block','imageStyle:side','|',
+                'toggleImageCaption','imageTextAlternative','|','linkImage'
+            ]},
+        removePlugins:[
+            'RealTimeCollaborativeComments','RealTimeCollaborativeTrackChanges','RealTimeCollaborativeRevisionHistory',
+            'PresenceList','Comments','TrackChanges','RevisionHistory','CloudServices','SlashCommand','WProofreader',
+            'MathType','ExportPdf','ExportWord','AIAssistant','CaseChange','FormatPainter','Pagination'
+        ]
+    }).then(ed=>{
+        editor = ed;
+        editor.model.document.on('change:data',()=>postHost({type:'contentChanged'}));
+        editor.model.document.selection.on('change:range',()=>postHost({type:'selection',state:queryState()}));
+        postHost({type:'selection',state:queryState()});
+    }).catch(console.error);
+
+    window.setHtml = html => editor ? editor.setData(html || '<p></p>') : null;
+    window.getHtml = () => editor ? editor.getData() : '';
+    window.exec = (cmd,arg) => { try{ editor.execute(cmd,arg); editor.editing.view.focus(); }catch{} };
+    window.queryState = () => JSON.stringify(queryState());
+
+    function queryState(){
+        if (!editor) return {};
+        const get = n => editor.commands.get(n)?.value ?? false;
+        return {
+            bold:get('bold'),
+            italic:get('italic'),
+            underline:get('underline'),
+            strikethrough:get('strikethrough'),
+            bulletedList:get('bulletedList'),
+            numberedList:get('numberedList')
+        };
+    }
+
+    // Base64 fallback (upload adapter yoksa)
+    document.addEventListener('drop', e=>{
+        if (!e.dataTransfer?.files?.length) return;
+        const f = e.dataTransfer.files[0];
+        if (!f.type.startsWith('image/')) return;
+        e.preventDefault();
+        const r = new FileReader();
+        r.onload = ()=>editor.model.change(w=>{
+            const img = w.createElement('imageBlock',{src:r.result});
+            editor.model.insertContent(img, editor.model.document.selection);
+        });
+        r.readAsDataURL(f);
+    });
+</script>
+</body>
+</html>
