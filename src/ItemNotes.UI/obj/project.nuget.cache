@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Z0bbLhIAXLA=",
+  "dgSpecHash": "bNxYEZLcZEY=",
   "success": true,
   "projectFilePath": "/Users/enescigdem/Downloads/item-notes/src/ItemNotes.UI/ItemNotes.UI.csproj",
   "expectedPackageFiles": [
@@ -27,6 +27,7 @@
     "/Users/enescigdem/.nuget/packages/documentformat.openxml/3.2.0/documentformat.openxml.3.2.0.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/documentformat.openxml.framework/3.2.0/documentformat.openxml.framework.3.2.0.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/dynamicdata/8.4.1/dynamicdata.8.4.1.nupkg.sha512",
+    "/Users/enescigdem/.nuget/packages/fluentavaloniaui/2.0.5/fluentavaloniaui.2.0.5.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/harfbuzzsharp/7.3.0.3/harfbuzzsharp.7.3.0.3.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/harfbuzzsharp.nativeassets.linux/7.3.0.3/harfbuzzsharp.nativeassets.linux.7.3.0.3.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/harfbuzzsharp.nativeassets.macos/7.3.0.3/harfbuzzsharp.nativeassets.macos.7.3.0.3.nupkg.sha512",
@@ -34,6 +35,7 @@
     "/Users/enescigdem/.nuget/packages/harfbuzzsharp.nativeassets.win32/7.3.0.3/harfbuzzsharp.nativeassets.win32.7.3.0.3.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/htmlagilitypack/1.12.0/htmlagilitypack.1.12.0.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
+    "/Users/enescigdem/.nuget/packages/microcom.codegenerator.msbuild/0.11.0/microcom.codegenerator.msbuild.0.11.0.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/microcom.runtime/0.11.0/microcom.runtime.0.11.0.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/microsoft.bcl.asyncinterfaces/6.0.0/microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/microsoft.codeanalysis.analyzers/3.3.3/microsoft.codeanalysis.analyzers.3.3.3.nupkg.sha512",

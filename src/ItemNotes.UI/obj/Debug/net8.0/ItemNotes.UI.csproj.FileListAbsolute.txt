@@ -224,3 +224,4 @@
 /Users/enescigdem/Downloads/item-notes/src/ItemNotes.UI/bin/Debug/net8.0/runtimes/browser/lib/net8.0/System.Text.Encodings.Web.dll
 /Users/enescigdem/Downloads/item-notes/src/ItemNotes.UI/bin/Debug/net8.0/runtimes/win/lib/net6.0/System.Windows.Extensions.dll
 /Users/enescigdem/Downloads/item-notes/src/ItemNotes.UI/bin/Debug/net8.0/appsettings.json
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.UI/bin/Debug/net8.0/FluentAvalonia.dll

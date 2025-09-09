@@ -14,6 +14,7 @@
           "Avalonia.Fonts.Inter": "11.2.8",
           "Avalonia.ReactiveUI": "11.2.8",
           "Avalonia.Themes.Fluent": "11.2.8",
+          "FluentAvaloniaUI": "2.0.5",
           "ItemNotes.Application": "1.0.0",
           "ItemNotes.Domain": "1.0.0",
           "Microsoft.CodeAnalysis.CSharp": "4.5.0",
@@ -359,6 +360,23 @@
           }
         }
       },
+      "FluentAvaloniaUI/2.0.5": {
+        "dependencies": {
+          "Avalonia": "11.2.8",
+          "Avalonia.Controls.ColorPicker": "11.2.8",
+          "Avalonia.Controls.DataGrid": "11.2.8",
+          "Avalonia.Controls.ItemsRepeater": "11.1.5",
+          "Avalonia.Skia": "11.2.8",
+          "MicroCom.CodeGenerator.MSBuild": "0.11.0",
+          "MicroCom.Runtime": "0.11.0"
+        },
+        "runtime": {
+          "lib/net6.0/FluentAvalonia.dll": {
+            "assemblyVersion": "2.0.5.0",
+            "fileVersion": "2.0.5.0"
+          }
+        }
+      },
       "HarfBuzzSharp/7.3.0.3": {
         "dependencies": {
           "HarfBuzzSharp.NativeAssets.Win32": "7.3.0.3",
@@ -443,6 +461,7 @@
           }
         }
       },
+      "MicroCom.CodeGenerator.MSBuild/0.11.0": {},
       "MicroCom.Runtime/0.11.0": {
         "runtime": {
           "lib/net5.0/MicroCom.Runtime.dll": {
@@ -1986,6 +2005,13 @@
       "path": "dynamicdata/8.4.1",
       "hashPath": "dynamicdata.8.4.1.nupkg.sha512"
     },
+    "FluentAvaloniaUI/2.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-curz95eyIqswA9X95AsZnvfPvtekFJkQGF34iLflhGdgdb2WL8as+O9k1FBddBoBvykCTyNfgva9q1npUsj92A==",
+      "path": "fluentavaloniaui/2.0.5",
+      "hashPath": "fluentavaloniaui.2.0.5.nupkg.sha512"
+    },
     "HarfBuzzSharp/7.3.0.3": {
       "type": "package",
       "serviceable": true,
@@ -2034,6 +2060,13 @@
       "sha512": "sha512-lQKvtaTDOXnoVJ20ibTuSIOf2i0uO0MPbDhd1jm238I+U/2ZnRENj0cktKZhtchBMtCUSRQ5v4xBCUbKNmyVMw==",
       "path": "humanizer.core/2.14.1",
       "hashPath": "humanizer.core.2.14.1.nupkg.sha512"
+    },
+    "MicroCom.CodeGenerator.MSBuild/0.11.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-CiRuIIvycn7RqT7p72+JdJsw1/No/1nc0Vs45Qkbvkn/uryWU57dGAUaqy9p2trRDvbsRBdQgF1hWLNUpgUSQw==",
+      "path": "microcom.codegenerator.msbuild/0.11.0",
+      "hashPath": "microcom.codegenerator.msbuild.0.11.0.nupkg.sha512"
     },
     "MicroCom.Runtime/0.11.0": {
       "type": "package",

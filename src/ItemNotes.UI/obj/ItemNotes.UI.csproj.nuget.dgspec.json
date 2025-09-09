@@ -325,6 +325,10 @@
               "target": "Package",
               "version": "[11.2.8, )"
             },
+            "FluentAvaloniaUI": {
+              "target": "Package",
+              "version": "[2.0.5, )"
+            },
             "Microsoft.CodeAnalysis.CSharp": {
               "target": "Package",
               "version": "[4.5.0, )"
