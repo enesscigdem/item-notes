@@ -1,28 +1,17 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
 using System.Threading.Tasks;
-using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Controls.Documents;
-using Avalonia.Media;
-using Avalonia.Media.Imaging;
 using ItemNotes.Application.Interfaces;
 using ItemNotes.Domain.Entities;
 using ReactiveUI;
-using AvRichTextBox;
-
-// Av tip alias'ları
-using AvFlowDocument = AvRichTextBox.FlowDocument;
-using AvParagraph = AvRichTextBox.Paragraph;
-using AvEditableRun = AvRichTextBox.EditableRun;
-using AvEditableInlineUIContainer = AvRichTextBox.EditableInlineUIContainer;
-using AvTextRange = AvRichTextBox.TextRange;
 
 namespace ItemNotes.UI.ViewModels
 {
+    /// <summary>
+    /// Not düzenleme penceresi için ViewModel. Sayfaları HTML olarak CKEditor'de düzenler.
+    /// </summary>
     public class NoteWindowViewModel : ReactiveObject
     {
         private readonly INoteService _noteService;
@@ -32,18 +21,8 @@ namespace ItemNotes.UI.ViewModels
             _noteService = noteService;
             Pages = new ObservableCollection<PageViewModel>();
 
-            BoldCommand          = ReactiveCommand.Create(() => SelectedPage?.ApplyBold());
-            ItalicCommand        = ReactiveCommand.Create(() => SelectedPage?.ApplyItalic());
-            UnderlineCommand     = ReactiveCommand.Create(() => SelectedPage?.ApplyUnderline());
-            StrikethroughCommand = ReactiveCommand.Create(() => SelectedPage?.ApplyStrikethrough());
-            BulletListCommand    = ReactiveCommand.Create(() => SelectedPage?.InsertBullet());
-            InsertImageCommand   = ReactiveCommand.CreateFromTask(() => SelectedPage?.InsertImageAsync() ?? Task.CompletedTask);
-            InsertTableCommand   = ReactiveCommand.Create(() => SelectedPage?.InsertPseudoTable(3, 3));
-            InsertSymbolCommand  = ReactiveCommand.Create(() => SelectedPage?.InsertSymbol('©'));
-            InsertLinkCommand    = ReactiveCommand.Create(() => SelectedPage?.InsertLink("https://"));
-
-            AddPageCommand       = ReactiveCommand.CreateFromTask(OnAddPageAsync);
-            SaveCommand          = ReactiveCommand.CreateFromTask(SaveAllPagesAsync);
+            AddPageCommand = ReactiveCommand.CreateFromTask(OnAddPageAsync);
+            SaveCommand    = ReactiveCommand.CreateFromTask(SaveAllPagesAsync);
         }
 
         private Note? _note;
@@ -62,7 +41,6 @@ namespace ItemNotes.UI.ViewModels
             set => this.RaiseAndSetIfChanged(ref _selectedPage, value);
         }
 
-        // FIX: Yanlış alan adı (_note_service) yerine _noteService
         public INoteService NoteService => _noteService;
 
         public async Task LoadNoteAsync(Guid noteId)
@@ -75,26 +53,12 @@ namespace ItemNotes.UI.ViewModels
 
             foreach (var page in note.Pages.OrderBy(p => p.PageIndex))
             {
-                var doc = new AvFlowDocument();
-                var p   = new AvParagraph();
-                p.Inlines.Add(new AvEditableRun(string.IsNullOrWhiteSpace(page.Content) ? "" : page.Content));
-                doc.Blocks.Add(p);
-
-                Pages.Add(new PageViewModel(page.Id, page.PageIndex, doc, page.IsReadOnly));
+                Pages.Add(new PageViewModel(page.Id, page.PageIndex, page.Content, page.IsReadOnly));
             }
 
             SelectedPage = Pages.FirstOrDefault();
         }
 
-        public ReactiveCommand<Unit, Unit> BoldCommand { get; }
-        public ReactiveCommand<Unit, Unit> ItalicCommand { get; }
-        public ReactiveCommand<Unit, Unit> UnderlineCommand { get; }
-        public ReactiveCommand<Unit, Unit> StrikethroughCommand { get; }
-        public ReactiveCommand<Unit, Unit> BulletListCommand { get; }
-        public ReactiveCommand<Unit, Unit> InsertImageCommand { get; }
-        public ReactiveCommand<Unit, Unit> InsertTableCommand { get; }
-        public ReactiveCommand<Unit, Unit> InsertSymbolCommand { get; }
-        public ReactiveCommand<Unit, Unit> InsertLinkCommand { get; }
         public ReactiveCommand<Unit, Unit> AddPageCommand { get; }
         public ReactiveCommand<Unit, Unit> SaveCommand { get; }
 
@@ -105,68 +69,37 @@ namespace ItemNotes.UI.ViewModels
             await LoadNoteAsync(Note.Id);
         }
 
-        /// <summary>
-        /// FlowDocument -> düz metin (basit export) ve kaydet.
-        /// </summary>
         public async Task SaveAllPagesAsync()
         {
             if (Note is null) return;
 
             foreach (var pageVm in Pages)
             {
-                var text = ExtractPlainText(pageVm.Document);
                 var pageEntity = Note.Pages.FirstOrDefault(p => p.Id == pageVm.PageId);
                 if (pageEntity != null)
                 {
-                    pageEntity.Content = text ?? string.Empty;
+                    pageEntity.Content = pageVm.Html ?? string.Empty;
                 }
             }
 
             await _noteService.UpdateNoteAsync(Note);
         }
-
-        private static string ExtractPlainText(AvFlowDocument doc)
-        {
-            if (doc is null) return string.Empty;
-
-            var parts = new List<string>();
-            foreach (var block in doc.Blocks)
-            {
-                if (block is AvParagraph p)
-                {
-                    var line = string.Empty;
-                    foreach (var inline in p.Inlines)
-                    {
-                        switch (inline)
-                        {
-                            case AvEditableRun run:
-                                line += run.Text ?? string.Empty;
-                                break;
-                            case AvEditableInlineUIContainer:
-                                line += "[img]";
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                    parts.Add(line);
-                }
-            }
-            return string.Join(Environment.NewLine, parts);
-        }
     }
 
+    /// <summary>
+    /// CKEditor'de düzenlenen bir not sayfası.
+    /// </summary>
     public class PageViewModel : ReactiveObject
     {
         public Guid PageId { get; }
         public int PageIndex { get; }
         public string Header => $"Sayfa {PageIndex}";
 
-        private AvFlowDocument _document;
-        public AvFlowDocument Document
+        private string? _html;
+        public string? Html
         {
-            get => _document;
-            set => this.RaiseAndSetIfChanged(ref _document, value);
+            get => _html;
+            set => this.RaiseAndSetIfChanged(ref _html, value);
         }
 
         private bool _isReadOnly;
@@ -176,156 +109,13 @@ namespace ItemNotes.UI.ViewModels
             set => this.RaiseAndSetIfChanged(ref _isReadOnly, value);
         }
 
-        // Toolbar durumları
-        private bool _isBold;
-        public bool IsBold { get => _isBold; set => this.RaiseAndSetIfChanged(ref _isBold, value); }
-
-        private bool _isItalic;
-        public bool IsItalic { get => _isItalic; set => this.RaiseAndSetIfChanged(ref _isItalic, value); }
-
-        private bool _isUnderline;
-        public bool IsUnderline { get => _isUnderline; set => this.RaiseAndSetIfChanged(ref _isUnderline, value); }
-
-        private bool _isStrike;
-        public bool IsStrike { get => _isStrike; set => this.RaiseAndSetIfChanged(ref _isStrike, value); }
-
-        private AvTextRange? Sel => Document?.Selection; // AvRichTextBox Selection (mevcut API'ye göre değişebilir)
-
-        public PageViewModel(Guid id, int index, AvFlowDocument document, bool isReadOnly)
+        public PageViewModel(Guid id, int index, string html, bool isReadOnly)
         {
             PageId = id;
             PageIndex = index;
-            _document = document;
+            _html = html;
             _isReadOnly = isReadOnly;
-        }
-
-        public void ApplyBold()
-        {
-            if (IsReadOnly || Sel is null || Sel.Length == 0) return;
-            Sel.ApplyFormatting(TextElement.FontWeightProperty, FontWeight.Bold);
-            RefreshSelectionStates();
-        }
-
-        public void ApplyItalic()
-        {
-            if (IsReadOnly || Sel is null || Sel.Length == 0) return;
-            Sel.ApplyFormatting(TextElement.FontStyleProperty, FontStyle.Italic);
-            RefreshSelectionStates();
-        }
-
-        public void ApplyUnderline()
-        {
-            if (IsReadOnly || Sel is null || Sel.Length == 0) return;
-            // FIX: TextDecorationsProperty -> TextBlock.TextDecorationsProperty
-            Sel.ApplyFormatting(TextBlock.TextDecorationsProperty, TextDecorations.Underline);
-            RefreshSelectionStates();
-        }
-
-        public void ApplyStrikethrough()
-        {
-            if (IsReadOnly || Sel is null || Sel.Length == 0) return;
-            // FIX: TextDecorationsProperty -> TextBlock.TextDecorationsProperty
-            Sel.ApplyFormatting(TextBlock.TextDecorationsProperty, TextDecorations.Strikethrough);
-            RefreshSelectionStates();
-        }
-
-        public void InsertBullet()
-        {
-            if (IsReadOnly) return;
-            var p = new AvParagraph();
-            p.Inlines.Add(new AvEditableRun("• "));
-            Document.Blocks.Add(p);
-        }
-
-        public async Task InsertImageAsync()
-        {
-            if (IsReadOnly) return;
-
-            var dialog = new OpenFileDialog
-            {
-                Title = "Resim Seç",
-                Filters = new List<FileDialogFilter>
-                {
-                    new() { Name = "Resimler", Extensions = { "png", "jpg", "jpeg", "gif", "bmp" } }
-                },
-                AllowMultiple = false
-            };
-
-            // FIX: IClassicDesktopStyleApplicationLifetimes -> IClassicDesktopStyleApplicationLifetime
-            var window =
-                (Avalonia.Application.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)
-                ?.MainWindow;
-
-            var files = window is null ? null : await dialog.ShowAsync(window);
-            if (files is null || files.Length == 0) return;
-
-            var img = new Image { Source = new Bitmap(files[0]), Width = 200 };
-            var editable = new AvEditableInlineUIContainer(img);
-
-            var p = new AvParagraph();
-            p.Inlines.Add(editable);
-            Document.Blocks.Add(p);
-
-            // Enter sonrası crash'i önlemek için boş satır
-            var blank = new AvParagraph();
-            blank.Inlines.Add(new AvEditableRun(""));
-            Document.Blocks.Add(blank);
-        }
-
-        public void InsertPseudoTable(int rows, int columns)
-        {
-            if (IsReadOnly) return;
-            var p = new AvParagraph();
-            p.Inlines.Add(new AvEditableRun($"[Tablo {rows}x{columns}] | hücreleri metinle doldurun"));
-            Document.Blocks.Add(p);
-        }
-
-        public void InsertSymbol(char symbol)
-        {
-            if (IsReadOnly) return;
-            var p = new AvParagraph();
-            p.Inlines.Add(new AvEditableRun(symbol.ToString()));
-            Document.Blocks.Add(p);
-        }
-
-        public void InsertLink(string url)
-        {
-            if (IsReadOnly) return;
-
-            var link = new HyperlinkButton { Content = url };
-            link.Click += (_, __) =>
-            {
-                try
-                {
-                    var psi = new System.Diagnostics.ProcessStartInfo(url) { UseShellExecute = true };
-                    System.Diagnostics.Process.Start(psi);
-                }
-                catch { }
-            };
-
-            var editable = new AvEditableInlineUIContainer(link);
-
-            var p = new AvParagraph();
-            p.Inlines.Add(editable);
-            Document.Blocks.Add(p);
-        }
-
-        public void RefreshSelectionStates()
-        {
-            try
-            {
-                if (Sel == null || Sel.Length == 0)
-                {
-                    IsBold = IsItalic = IsUnderline = IsStrike = false;
-                    return;
-                }
-                // Not: AvRichTextBox'ta seçimden stil okuma için public API yoksa,
-                // burada konservatif kalıyoruz. (Butonlar komutla çalışıyor.)
-            }
-            catch
-            {
-                IsBold = IsItalic = IsUnderline = IsStrike = false;
-            }
         }
     }
 }
+

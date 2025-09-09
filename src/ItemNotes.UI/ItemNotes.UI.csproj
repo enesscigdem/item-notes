@@ -21,7 +21,6 @@
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
         <PackageReference Include="FluentAvaloniaUI" Version="2.0.5" />
-        <PackageReference Include="Simplecto.Avalonia.RichTextBox" Version="1.3.9" />
 
         <!-- .NET 8 ile hizalı extensions -->
         <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.0" />

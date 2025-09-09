@@ -2,7 +2,6 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:conv="clr-namespace:ItemNotes.UI.Converters"
-    xmlns:avRichTextBox="clr-namespace:AvRichTextBox;assembly=AvRichTextBox"
     xmlns:views="clr-namespace:ItemNotes.UI.Views"
     xmlns:controls="clr-namespace:ItemNotes.UI.Controls"
     x:Class="ItemNotes.UI.Views.NoteWindow"
@@ -38,36 +37,9 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <!-- Sol: Format bar -->
+                    <!-- Sol: Basit toolbar -->
                     <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
                         <Button Content="Yeni Sayfa" Command="{Binding AddPageCommand}"/>
-                        <Separator Width="8"/>
-
-                        <!-- Durum gösteren Toggle'lar -->
-                        <ToggleButton IsChecked="{Binding SelectedPage.IsBold, Mode=TwoWay}"
-                                      Content="B" FontWeight="Bold"
-                                      ToolTip.Tip="Kalın (Ctrl/⌘+B)"
-                                      Command="{Binding BoldCommand}"/>
-                        <ToggleButton IsChecked="{Binding SelectedPage.IsItalic, Mode=TwoWay}"
-                                      Content="I" FontStyle="Italic"
-                                      ToolTip.Tip="İtalik (Ctrl/⌘+I)"
-                                      Command="{Binding ItalicCommand}"/>
-                        <ToggleButton IsChecked="{Binding SelectedPage.IsUnderline, Mode=TwoWay}"
-                                      Content="U"
-                                      ToolTip.Tip="Altı Çizili (Ctrl/⌘+U)"
-                                      Command="{Binding UnderlineCommand}"/>
-                        <ToggleButton IsChecked="{Binding SelectedPage.IsStrike, Mode=TwoWay}"
-                                      Content="S̶"
-                                      ToolTip.Tip="Üstü Çizili"
-                                      Command="{Binding StrikethroughCommand}"/>
-
-                        <Separator Width="8"/>
-
-                        <Button Content="• Liste" Command="{Binding BulletListCommand}"/>
-                        <Button Content="Resim…" Command="{Binding InsertImageCommand}"/>
-                        <Button Content="Tablo" Command="{Binding InsertTableCommand}"/>
-                        <Button Content="Bağlantı" Command="{Binding InsertLinkCommand}"/>
-
                         <Separator Width="8"/>
                         <Button Content="Kaydet" Click="OnSaveClick" ToolTip.Tip="Kaydet (Ctrl/⌘+S)"/>
                     </StackPanel>
@@ -91,7 +63,8 @@
             </Border>
 
             <!-- İçerik -->
-            <TabControl ItemsSource="{Binding Pages}"
+            <TabControl x:Name="PagesTabControl"
+                        ItemsSource="{Binding Pages}"
                         SelectedItem="{Binding SelectedPage}"
                         Margin="10,10,10,12">
                 <TabControl.ItemTemplate>
@@ -104,7 +77,8 @@
                     <DataTemplate>
                         <Grid RowDefinitions="Auto,*">
                             <controls:CkEditorView x:Name="Editor"
-                                                   Grid.Row="1"/>
+                                                   Grid.Row="1"
+                                                   InitialHtml="{Binding Html}"/>
                         </Grid>
                     </DataTemplate>
                 </TabControl.ContentTemplate>
@@ -114,14 +88,7 @@
 
     <!-- Kısayollar: Avalonia => KeyBindings -->
     <Window.KeyBindings>
-        <KeyBinding Gesture="Ctrl+B" Command="{Binding BoldCommand}"/>
-        <KeyBinding Gesture="Ctrl+I" Command="{Binding ItalicCommand}"/>
-        <KeyBinding Gesture="Ctrl+U" Command="{Binding UnderlineCommand}"/>
         <KeyBinding Gesture="Ctrl+S" Command="{Binding SaveCommand}"/>
-
-        <KeyBinding Gesture="Cmd+B" Command="{Binding BoldCommand}"/>
-        <KeyBinding Gesture="Cmd+I" Command="{Binding ItalicCommand}"/>
-        <KeyBinding Gesture="Cmd+U" Command="{Binding UnderlineCommand}"/>
         <KeyBinding Gesture="Cmd+S" Command="{Binding SaveCommand}"/>
     </Window.KeyBindings>
 </Window>

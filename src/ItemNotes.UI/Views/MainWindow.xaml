@@ -12,11 +12,11 @@
                 <!-- Komut + Click fallback -->
                 <Button x:Name="BtnOpen"
                         Content="Seçileni Aç"
-                        Command="{Binding OpenSelectedCommand}"
+                        Command="{Binding OpenNoteCommand}"
                         Click="OnOpenSelectedClick"/>
                 <Button x:Name="BtnNew"
                         Content="Yeni Not"
-                        Command="{Binding NewNoteCommand}"
+                        Command="{Binding CreateNoteCommand}"
                         Click="OnNewNoteClick"/>
             </StackPanel>
 

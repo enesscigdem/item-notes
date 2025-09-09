@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,15 +7,10 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
-using AvRichTextBox;
 using ItemNotes.Domain.Enums;
 using ItemNotes.UI.Converters;
+using ItemNotes.UI.Controls;
 using ItemNotes.UI.ViewModels;
-
-// Av tip alias'ları
-using AvParagraph = AvRichTextBox.Paragraph;
-using AvEditableRun = AvRichTextBox.EditableRun;
-using AvEditableInlineUIContainer = AvRichTextBox.EditableInlineUIContainer;
 
 namespace ItemNotes.UI.Views
 {
@@ -30,7 +26,11 @@ namespace ItemNotes.UI.Views
 
             this.Closing += async (_, __) =>
             {
-                try { await _viewModel.SaveAllPagesAsync(); }
+                try
+                {
+                    await SyncEditorsToViewModel();
+                    await _viewModel.SaveAllPagesAsync();
+                }
                 catch { /* ignore */ }
             };
         }
@@ -64,6 +64,7 @@ namespace ItemNotes.UI.Views
 
         private async void OnSaveClick(object? sender, RoutedEventArgs e)
         {
+            await SyncEditorsToViewModel();
             await _viewModel.SaveAllPagesAsync();
         }
 
@@ -72,40 +73,24 @@ namespace ItemNotes.UI.Views
             try { BeginMoveDrag(e); } catch { /* ignore */ }
         }
 
-        // Enter-sonrası resim çökmesi + (Ctrl/Cmd+A çağrısı yok; AvRichTextBox'ta SelectAll yok)
-        private void Editor_KeyDown(object? sender, KeyEventArgs e)
+        /// <summary>
+        /// Mevcut CKEditor içeriklerini ViewModel'e yazar.
+        /// </summary>
+        private async Task SyncEditorsToViewModel()
         {
-            if (sender is not AvRichTextBox.RichTextBox editor) return;
+            var tabs = this.FindControl<TabControl>("PagesTabControl");
+            if (tabs?.Items is null) return;
 
-            // Sadece Enter fix'i:
-            if (e.Key == Key.Enter)
+            var items = tabs.Items.Cast<object>().ToList();
+            for (int i = 0; i < items.Count; i++)
             {
-                try
+                var container = tabs.ItemContainerGenerator.ContainerFromIndex(i) as TabItem;
+                var editor = (container?.Content as Control)?.FindControl<CkEditorView>("Editor");
+                if (editor != null && items[i] is PageViewModel vm)
                 {
-                    var doc = editor.FlowDocument;
-                    var lastBlock = doc?.Blocks.LastOrDefault();
-                    if (lastBlock is AvParagraph p && p.Inlines.Count > 0 && p.Inlines.Last() is AvEditableInlineUIContainer)
-                    {
-                        var np = new AvParagraph();
-                        np.Inlines.Add(new AvEditableRun("")); // boş satır
-                        doc.Blocks.Add(np);
-                        e.Handled = true;
-                    }
+                    vm.Html = await editor.GetHtmlAsync();
                 }
-                catch { /* ignore */ }
             }
-        }
-
-        private void Editor_KeyUp(object? sender, KeyEventArgs e)
-        {
-            // seçim/durum güncellemesi
-            try { _viewModel.SelectedPage?.RefreshSelectionStates(); } catch { }
-        }
-
-        private void Editor_PointerReleased(object? sender, PointerReleasedEventArgs e)
-        {
-            // seçim/durum güncellemesi
-            try { _viewModel.SelectedPage?.RefreshSelectionStates(); } catch { }
         }
     }
 }
