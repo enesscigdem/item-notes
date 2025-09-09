@@ -75,11 +75,8 @@
 
                 <TabControl.ContentTemplate>
                     <DataTemplate>
-                        <Grid RowDefinitions="Auto,*">
-                            <controls:CkEditorView x:Name="Editor"
-                                                   Grid.Row="1"
-                                                   InitialHtml="{Binding Html}"/>
-                        </Grid>
+                        <controls:CkEditorView x:Name="Editor"
+                                               Html="{Binding Html}"/>
                     </DataTemplate>
                 </TabControl.ContentTemplate>
             </TabControl>

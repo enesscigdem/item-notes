@@ -5,6 +5,8 @@
     xmlns:wv="clr-namespace:AvaloniaWebView;assembly=WebView.Avalonia">
     <Grid>
         <!-- WebView.Avalonia kontrolü -->
-        <WebView x:Name="EditorHost"/>
+        <WebView x:Name="EditorHost"
+                 HorizontalAlignment="Stretch"
+                 VerticalAlignment="Stretch"/>
     </Grid>
 </UserControl>

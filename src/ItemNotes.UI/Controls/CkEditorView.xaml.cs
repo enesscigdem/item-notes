@@ -11,9 +11,24 @@ namespace ItemNotes.UI.Controls
     public partial class CkEditorView : UserControl
     {
         private bool _editorReady;
+        private string? _pendingHtml;
 
-        /// <summary> Editör hazır olmadan set edilirse buffer'lanır. </summary>
-        public string? InitialHtml { get; set; }
+        /// <summary>
+        /// CKEditor içerisindeki HTML'i temsil eden bağlanabilir özellik.
+        /// </summary>
+        public static readonly StyledProperty<string?> HtmlProperty =
+            AvaloniaProperty.Register<CkEditorView, string?>(nameof(Html));
+
+        public string? Html
+        {
+            get => GetValue(HtmlProperty);
+            set => SetValue(HtmlProperty, value);
+        }
+
+        static CkEditorView()
+        {
+            HtmlProperty.Changed.AddClassHandler<CkEditorView>((x, e) => x.OnHtmlChanged(e));
+        }
 
         public CkEditorView()
         {
@@ -28,34 +43,29 @@ namespace ItemNotes.UI.Controls
 
         private async Task InitializeAsync()
         {
-            // 1) CKEditor HTML'ini oluştur
+            // CKEditor HTML'i bas ve editörün hazır olmasını bekle.
             var html = BuildCkEditorHtml();
+            await WriteHtmlAsync(html);
 
-            // 2) about:blank içine document.write ile bas. Hazır olana kadar birkaç kez dene.
             for (int i = 0; i < 50; i++)
             {
                 try
                 {
-                    await WriteHtmlAsync(html);
-                    // 3) CKEditor hazır mı?
                     var ready = await EvalAsync("window.editorReady === true ? '1' : '0'");
                     if (ready == "1")
                     {
                         _editorReady = true;
-                        if (!string.IsNullOrWhiteSpace(InitialHtml))
-                            await SetHtmlAsync(InitialHtml!);
+                        if (!string.IsNullOrWhiteSpace(_pendingHtml))
+                            await SetHtmlAsync(_pendingHtml);
                         return;
                     }
                 }
                 catch
                 {
-                    // İlk saniyelerde WebView henüz hazır olmayabilir; bekleyip tekrar dene.
+                    // WebView henüz hazır olmayabilir; tekrar dene.
                 }
                 await Task.Delay(100);
             }
-
-            // Yine de hazır olmadıysa en azından boş kur.
-            await WriteHtmlAsync(html);
         }
 
         /// <summary> Editöre HTML set et. </summary>
@@ -63,7 +73,7 @@ namespace ItemNotes.UI.Controls
         {
             if (!_editorReady)
             {
-                InitialHtml = html;
+                _pendingHtml = html;
                 return;
             }
             var json = JsonSerializer.Serialize(html);
@@ -73,13 +83,20 @@ namespace ItemNotes.UI.Controls
         /// <summary> Editörden HTML al. </summary>
         public async Task<string> GetHtmlAsync()
         {
-            if (!_editorReady) return InitialHtml ?? string.Empty;
+            if (!_editorReady)
+                return _pendingHtml ?? string.Empty;
             var result = await EvalAsync("window.editorApi && window.editorApi.getData()");
             return result ?? string.Empty;
         }
 
         /// <summary> JS çalıştır. </summary>
         private Task<string?> EvalAsync(string js) => EditorHost.ExecuteScriptAsync(js);
+
+        private async void OnHtmlChanged(AvaloniaPropertyChangedEventArgs e)
+        {
+            if (e.NewValue is string html)
+                await SetHtmlAsync(html);
+        }
 
         /// <summary>
         /// Mevcut belgeyi base64 HTML ile değiştirir (navigate gerektirmez).
