@@ -248,3 +248,5 @@
 /Users/enescigdem/Downloads/item-notes/src/ItemNotes.UI/bin/Debug/net8.0/runtimes/win-arm64/native/WebView2Loader.dll
 /Users/enescigdem/Downloads/item-notes/src/ItemNotes.UI/bin/Debug/net8.0/runtimes/win-x64/native/WebView2Loader.dll
 /Users/enescigdem/Downloads/item-notes/src/ItemNotes.UI/bin/Debug/net8.0/runtimes/win-x86/native/WebView2Loader.dll
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.UI/bin/Debug/net8.0/DialogHost.Avalonia.dll
+/Users/enescigdem/Downloads/item-notes/src/ItemNotes.UI/bin/Debug/net8.0/MsBox.Avalonia.dll

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "KmTZA51wUII=",
+  "dgSpecHash": "P+rAhYzx/To=",
   "success": true,
   "projectFilePath": "/Users/enescigdem/Downloads/item-notes/src/ItemNotes.UI/ItemNotes.UI.csproj",
   "expectedPackageFiles": [
@@ -26,6 +26,7 @@
     "/Users/enescigdem/.nuget/packages/azure.core/1.35.0/azure.core.1.35.0.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/azure.identity/1.10.3/azure.identity.1.10.3.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/cairosharp/3.24.24.95/cairosharp.3.24.24.95.nupkg.sha512",
+    "/Users/enescigdem/.nuget/packages/dialoghost.avalonia/0.8.1/dialoghost.avalonia.0.8.1.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/documentformat.openxml/3.2.0/documentformat.openxml.3.2.0.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/documentformat.openxml.framework/3.2.0/documentformat.openxml.framework.3.2.0.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/dynamicdata/8.4.1/dynamicdata.8.4.1.nupkg.sha512",
@@ -41,6 +42,7 @@
     "/Users/enescigdem/.nuget/packages/harfbuzzsharp.nativeassets.win32/7.3.0.3/harfbuzzsharp.nativeassets.win32.7.3.0.3.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/htmlagilitypack/1.12.0/htmlagilitypack.1.12.0.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
+    "/Users/enescigdem/.nuget/packages/messagebox.avalonia/3.2.0/messagebox.avalonia.3.2.0.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/microcom.codegenerator.msbuild/0.11.0/microcom.codegenerator.msbuild.0.11.0.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/microcom.runtime/0.11.0/microcom.runtime.0.11.0.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/microsoft.bcl.asyncinterfaces/7.0.0/microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
@@ -158,9 +160,9 @@
     "/Users/enescigdem/.nuget/packages/webview.avalonia.linux/11.0.0.1/webview.avalonia.linux.11.0.0.1.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/webview.avalonia.maccatalyst/11.0.0.1/webview.avalonia.maccatalyst.11.0.0.1.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/webview.avalonia.windows/11.0.0.1/webview.avalonia.windows.11.0.0.1.nupkg.sha512",
+    "/Users/enescigdem/.nuget/packages/microsoft.netcore.app.ref/8.0.13/microsoft.netcore.app.ref.8.0.13.nupkg.sha512",
     "/Users/enescigdem/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.13/microsoft.aspnetcore.app.ref.8.0.13.nupkg.sha512",
-    "/Users/enescigdem/.nuget/packages/microsoft.netcore.app.host.osx-arm64/8.0.13/microsoft.netcore.app.host.osx-arm64.8.0.13.nupkg.sha512",
-    "/Users/enescigdem/.nuget/packages/microsoft.netcore.app.ref/8.0.13/microsoft.netcore.app.ref.8.0.13.nupkg.sha512"
+    "/Users/enescigdem/.nuget/packages/microsoft.netcore.app.host.osx-arm64/8.0.13/microsoft.netcore.app.host.osx-arm64.8.0.13.nupkg.sha512"
   ],
   "logs": []
 }

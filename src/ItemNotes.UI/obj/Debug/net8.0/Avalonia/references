@@ -35,6 +35,7 @@
 /Users/enescigdem/.nuget/packages/azure.core/1.35.0/lib/net6.0/Azure.Core.dll
 /Users/enescigdem/.nuget/packages/azure.identity/1.10.3/lib/netstandard2.0/Azure.Identity.dll
 /Users/enescigdem/.nuget/packages/cairosharp/3.24.24.95/lib/net6.0/CairoSharp.dll
+/Users/enescigdem/.nuget/packages/dialoghost.avalonia/0.8.1/lib/netstandard2.0/DialogHost.Avalonia.dll
 /Users/enescigdem/.nuget/packages/documentformat.openxml/3.2.0/lib/net8.0/DocumentFormat.OpenXml.dll
 /Users/enescigdem/.nuget/packages/documentformat.openxml.framework/3.2.0/lib/net8.0/DocumentFormat.OpenXml.Framework.dll
 /Users/enescigdem/.nuget/packages/webview.avalonia/11.0.0.1/lib/netstandard2.0/DryIoc.Shared.dll
@@ -103,6 +104,7 @@
 /Users/enescigdem/.nuget/packages/webview.avalonia.windows/11.0.0.1/lib/netstandard2.0/Microsoft.Web.WebView2.Core.dll
 /Users/enescigdem/.nuget/packages/microsoft.netcore.app.ref/8.0.13/ref/net8.0/Microsoft.Win32.Primitives.dll
 /Users/enescigdem/.nuget/packages/microsoft.netcore.app.ref/8.0.13/ref/net8.0/Microsoft.Win32.Registry.dll
+/Users/enescigdem/.nuget/packages/messagebox.avalonia/3.2.0/lib/netstandard2.0/MsBox.Avalonia.dll
 /Users/enescigdem/.nuget/packages/microsoft.netcore.app.ref/8.0.13/ref/net8.0/mscorlib.dll
 /Users/enescigdem/.nuget/packages/microsoft.netcore.app.ref/8.0.13/ref/net8.0/netstandard.dll
 /Users/enescigdem/.nuget/packages/pangosharp/3.24.24.95/lib/net6.0/PangoSharp.dll
